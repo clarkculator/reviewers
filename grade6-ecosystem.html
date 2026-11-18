@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pond Pals Reviewer · Science 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#4a3b52;--soft:#7b6a85;--bg:#fff7f0;--peach:#ffd9c7;--mint:#c9f0dc;--lav:#e2d6ff;--butter:#fff1b8;--sky:#cfeafe;--pink:#ffcfe3;--pop:#ff8fb1;--good:#2e9e6b;--bad:#d9577a;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Nunito,system-ui,sans-serif;
+background-image:radial-gradient(#ffe3d3 2px,transparent 2px);background-size:26px 26px}
+h1,h2,h3,.fun{font-family:Fredoka,"Trebuchet MS",system-ui,sans-serif;font-weight:600;line-height:1.2;margin:0}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px}
+nav{position:sticky;top:0;z-index:5;background:#fff7f0ee;backdrop-filter:blur(6px);border-bottom:3px dotted var(--peach)}
+nav .wrap{display:flex;gap:8px;overflow-x:auto;padding:10px 18px;scrollbar-width:none}
+nav a{white-space:nowrap;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:99px;padding:3px 14px;font:500 15px Fredoka,sans-serif;box-shadow:0 3px 0 var(--ink)}
+nav a:hover,nav a:focus-visible{background:var(--butter);outline:none}
+header{text-align:center;padding:38px 0 18px}
+.critters{font-size:44px;letter-spacing:6px}
+.critters span{display:inline-block;animation:hop 2.4s ease-in-out infinite}
+.critters span:nth-child(2){animation-delay:.3s}.critters span:nth-child(3){animation-delay:.6s}.critters span:nth-child(4){animation-delay:.9s}.critters span:nth-child(5){animation-delay:1.2s}
+@keyframes hop{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-14px) rotate(-6deg)}}
+h1{font-size:clamp(32px,7vw,52px);margin:8px 0}
+.sub{max-width:560px;margin:0 auto;color:var(--soft)}
+.tracker{background:#fff;border:3px solid var(--ink);border-radius:24px;box-shadow:0 6px 0 var(--ink);padding:14px 18px;margin:22px auto 0;max-width:560px}
+.bar{height:16px;background:var(--lav);border-radius:99px;overflow:hidden;margin:8px 0;border:2px solid var(--ink)}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pop),#ffb86b);transition:width .5s}
+.stamps{font-size:26px;letter-spacing:4px;min-height:36px}
+section{margin:44px 0}
+.title{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.title .ic{font-size:34px;background:var(--c,var(--butter));border:3px solid var(--ink);border-radius:18px;padding:2px 10px;box-shadow:0 4px 0 var(--ink)}
+h2{font-size:clamp(24px,5vw,32px)}
+.card{background:#fff;border:3px solid var(--ink);border-radius:24px;box-shadow:0 6px 0 var(--ink);padding:18px 20px;margin:14px 0}
+.card.tint{background:var(--c)}
+.card h3{font-size:20px;margin-bottom:4px}
+.card p{margin:6px 0}
+.tip{background:var(--butter);border:2px dashed var(--ink);border-radius:16px;padding:8px 14px;margin:12px 0 0;font-weight:600}
+details{background:#fff;border:3px solid var(--ink);border-radius:20px;margin:12px 0;box-shadow:0 5px 0 var(--ink)}
+summary{cursor:pointer;padding:12px 18px;font:500 19px Fredoka,sans-serif;list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";background:var(--pop);color:#fff;border-radius:50%;width:28px;height:28px;display:grid;place-items:center;flex:none;font-size:18px}
+details[open] summary::after{content:"－"}
+summary:focus-visible,button:focus-visible,.flip:focus-visible,textarea:focus-visible{outline:4px solid var(--pop);outline-offset:2px}
+.inner{padding:0 18px 16px}
+ul.k{padding-left:20px;margin:6px 0}
+.tbl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:10px 0}
+.tbl>div{border:2px solid var(--ink);border-radius:18px;padding:10px 14px;background:var(--c)}
+.tbl b{font-family:Fredoka,sans-serif;font-size:18px;display:block}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0;font-weight:700}
+.chain span{background:var(--c,var(--mint));border:2px solid var(--ink);border-radius:14px;padding:4px 12px}
+.chain em{font-style:normal;color:var(--pop);font-size:22px}
+/* flip cards */
+.terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.flip{perspective:700px;height:150px;cursor:pointer;background:none;border:0;padding:0;font:inherit;color:inherit;text-align:center}
+.flip>div{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip.on>div{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border:3px solid var(--ink);border-radius:22px;box-shadow:0 5px 0 var(--ink);display:flex;align-items:center;justify-content:center;padding:10px;flex-direction:column}
+.flip .f{background:var(--c);font:500 21px Fredoka,sans-serif}
+.flip .f small{font:600 13px Nunito;color:var(--soft);margin-top:6px}
+.flip .b{background:#fff;transform:rotateY(180deg);font-size:14.5px;line-height:1.4;overflow:auto}
+/* quiz */
+.quiz{background:var(--lav);border:3px solid var(--ink);border-radius:24px;padding:16px 18px;margin:18px 0}
+.quiz h3{font-size:20px;margin-bottom:8px}
+.q{background:#fff;border:2px solid var(--ink);border-radius:18px;padding:12px 14px;margin:10px 0}
+.q p{margin:0 0 8px;font-weight:700}
+.opts{display:grid;gap:8px}
+.opt{font:600 16px Nunito,sans-serif;text-align:left;background:var(--bg);color:var(--ink);border:2px solid var(--ink);border-radius:14px;padding:8px 12px;cursor:pointer}
+.opt:hover:not(:disabled){background:var(--butter)}
+.opt.right{background:var(--mint);border-color:var(--good)}
+.opt.wrong{background:#ffd9e4;border-color:var(--bad);animation:shake .3s}
+.opt:disabled{cursor:default}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.fb{margin:8px 0 0;font-weight:600;min-height:0}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.btn{font:500 17px Fredoka,sans-serif;background:var(--pop);color:#fff;border:3px solid var(--ink);border-radius:99px;padding:6px 20px;box-shadow:0 4px 0 var(--ink);cursor:pointer}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+textarea{width:100%;min-height:110px;border:3px solid var(--ink);border-radius:18px;padding:10px 12px;font:16px Nunito,sans-serif;color:var(--ink);background:#fff;resize:vertical}
+.check label{display:block;background:#fff;border:2px solid var(--ink);border-radius:14px;padding:6px 12px;margin:8px 0;cursor:pointer;font-weight:600}
+.check input{accent-color:var(--pop);margin-right:8px}
+.ti{flex:1;min-width:160px;border:2px solid var(--ink);border-radius:14px;padding:8px 12px;font:600 16px Nunito,sans-serif;text-transform:uppercase;color:var(--ink);background:var(--bg)}
+.hide{display:none}
+footer{text-align:center;color:var(--soft);padding:10px 0 50px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav aria-label="Sections"><div class="wrap">
+<a href="#terms">Key Terms</a><a href="#t1">Who’s Who</a><a href="#t2">Food Chains</a><a href="#t3">Living &amp; Nonliving</a><a href="#t4">Balance</a><a href="#t5">Partners</a><a href="#t7">Pond Spotlight</a><a href="#t8">Tricky Pairs</a><a href="#t9">Type It</a><a href="#t6">Think Like a Scientist</a>
+</div></nav>
+
+<div class="wrap">
+<header>
+  <div class="critters" aria-hidden="true"><span>🐸</span><span>🌱</span><span>🐰</span><span>🦊</span><span>🍄</span></div>
+  <h1>Pond Pals Reviewer</h1>
+  <p class="sub">Science 6 · Ecosystems. Read a little, flip a few cards, try the mini-quizzes, and earn a sticker for every topic you master. You don’t need to memorize lines. You need to understand how living things fit together.</p>
+  <div class="tracker">
+    <div class="fun">Your sticker book</div>
+    <div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><i id="fill"></i></div>
+    <div class="stamps" id="stamps" aria-live="polite">Nothing yet. Let’s begin!</div>
+  </div>
+</header>
+
+<!-- KEY TERMS -->
+<section id="terms">
+  <div class="title"><span class="ic" style="--c:var(--pink)">🔑</span><h2>Key Terms</h2></div>
+  <p>Tap a card to flip it. Say the meaning in your own words <em>before</em> you flip!</p>
+  <div class="terms" id="termGrid"></div>
+</section>
+
+<!-- T1 -->
+<section id="t1">
+  <div class="title"><span class="ic" style="--c:var(--mint)">🌿</span><h2>Who’s Who in an Ecosystem</h2></div>
+  <div class="card tint" style="--c:var(--mint)">
+    <p>An <b>ecosystem</b> is a community of living things and the nonliving things around them, all working together. Everyone has a job, and the job is about <b>how you get your energy</b>.</p>
+  </div>
+  <div class="tbl">
+    <div style="--c:#e4f8d7"><b>🌱 Producers</b>Make their own food using sunlight, water, and air (photosynthesis). Every food chain begins with them.</div>
+    <div style="--c:var(--butter)"><b>🐛 Consumers</b>Can’t make food, so they eat other living things. Herbivores eat plants, carnivores eat animals, omnivores eat both.</div>
+    <div style="--c:var(--peach)"><b>🦅 Scavengers</b>Eat animals that are already dead, usually ones they did not kill. They are still animals that find and eat food.</div>
+    <div style="--c:var(--lav)"><b>🍄 Decomposers</b>Break dead plants and animals down into tiny bits and return nutrients to the soil, so producers can use them again.</div>
+  </div>
+  <details><summary>Why do plants need light?</summary><div class="inner">
+    <p>Light is the <b>energy source</b> for photosynthesis. Plants capture it and turn water and carbon dioxide into sugar, which is their food. No light means no food made, and when plants struggle, everything that eats them struggles too.</p>
+    <div class="tip">💡 Plants don’t need light to look pretty or to feel warm. They need it to <em>make food</em>.</div></div></details>
+  <details><summary>Scavenger or decomposer? Spot the difference</summary><div class="inner">
+    <ul class="k"><li>A scavenger is usually an <b>animal</b> you can see taking bites of a carcass.</li>
+    <li>A decomposer works <b>on a much smaller scale</b>, breaking things down until they become nutrients again.</li>
+    <li>Scavengers eat dead things <em>and</em> leave leftovers. Decomposers finish the job and recycle.</li></ul>
+    <div class="tip">💡 Ask: does it just eat the dead animal, or does it turn it back into nutrients for the soil?</div></div></details>
+
+  <div class="quiz" id="q1"><h3>🧁 Mini-quiz: Who’s Who</h3></div>
+</section>
+
+<!-- T2 -->
+<section id="t2">
+  <div class="title"><span class="ic" style="--c:var(--butter)">🔗</span><h2>Food Chains &amp; Levels</h2></div>
+  <div class="card">
+    <p>A <b>food chain</b> shows who eats whom. The arrow means <b>“gives energy to”</b>, so it points <em>toward the eater</em>.</p>
+    <div class="chain"><span style="--c:#e4f8d7">🌾 Grass</span><em>➜</em><span style="--c:var(--butter)">🐛 Grasshopper</span><em>➜</em><span style="--c:var(--peach)">🐸 Frog</span><em>➜</em><span style="--c:var(--lav)">🐍 Snake</span></div>
+    <p>Count the levels from the <b>producer</b>. The first consumer to eat the producer is <b>primary</b>. The next is <b>secondary</b>, then <b>tertiary</b>.</p>
+    <div class="tip">💡 Trick: put the word “first, second, third” on each eater in order. The producer doesn’t get a number. It’s the starter.</div>
+  </div>
+  <details><summary>Can an animal be on more than one level?</summary><div class="inner">
+    <p>Yes! In real ecosystems chains overlap into a <b>food web</b>. An animal that eats both plants and animals can be a primary consumer in one chain and a secondary consumer in another. In a single chain, though, each organism holds one place.</p></div></details>
+  <details><summary>Where do decomposers fit?</summary><div class="inner">
+    <p>They work with <b>every</b> level. When any producer or consumer dies, decomposers recycle its nutrients back into the soil. That’s why a chain is really a circle over time.</p></div></details>
+
+  <div class="quiz" id="q2"><h3>🍡 Mini-quiz: Food Chains</h3></div>
+</section>
+
+<!-- T3 -->
+<section id="t3">
+  <div class="title"><span class="ic" style="--c:var(--sky)">☀️</span><h2>Living &amp; Nonliving Parts</h2></div>
+  <div class="tbl">
+    <div style="--c:#e4f8d7"><b>🐞 Biotic</b>Living things, <em>and things that were once living</em>: plants, animals, fungi, bacteria, and also dead leaves, logs, and bones.</div>
+    <div style="--c:var(--sky)"><b>🪨 Abiotic</b>Never alive: sunlight, water, air, temperature, rocks, and soil minerals.</div>
+  </div>
+  <details><summary>Why are dead leaves still biotic?</summary><div class="inner">
+    <p>Biotic means “from life.” Something that was once part of a living organism still counts, because it came from life and decomposers will use it. Rocks and sunlight were never alive, so they are abiotic.</p>
+    <div class="tip">💡 Ask: was this ever alive, or made by something alive? If yes, it’s biotic.</div></div></details>
+  <details><summary>Soil: why not all soil is equal</summary><div class="inner">
+    <ul class="k"><li><b>Sandy soil</b>: big grains, water drains fast, few nutrients.</li>
+    <li><b>Clay soil</b>: tiny grains, holds lots of water, can get hard and sticky.</li>
+    <li><b>Loam soil</b>: a rich mix of sand, clay, and decayed matter. It holds the right amount of water and nutrients, so it’s the best for growing crops.</li></ul>
+    <p>Notice how a mix of soil (abiotic) and decayed matter (biotic) makes the best home for plants. The two sides depend on each other.</p></div></details>
+  <details><summary>What happens when an abiotic factor changes?</summary><div class="inner">
+    <p>Living things depend on abiotic factors, so a change ripples through the whole community. Think of a small stream that shrinks in dry weather:</p>
+    <div class="chain"><span style="--c:var(--sky)">💧 less water</span><em>➜</em><span style="--c:#e4f8d7">🌱 plants wilt</span><em>➜</em><span style="--c:var(--butter)">🐛 less food for plant-eaters</span><em>➜</em><span style="--c:var(--peach)">🦊 hunters struggle too</span></div>
+    <p>Animals may also move away, crowd into smaller spaces, or compete harder for what is left.</p></div></details>
+
+  <div class="quiz" id="q3"><h3>🌈 Mini-quiz: Living &amp; Nonliving</h3></div>
+</section>
+
+<!-- T4 -->
+<section id="t4">
+  <div class="title"><span class="ic" style="--c:var(--peach)">⚖️</span><h2>Balance &amp; Competition</h2></div>
+  <div class="card">
+    <h3>Predators and prey</h3>
+    <p>A <b>predator</b> hunts and eats another animal, its <b>prey</b>. The two populations rise and fall together, like a seesaw with a delay: more prey means more food, so predators increase. Then more predators eat more prey, and prey drops.</p>
+    <div class="tip">💡 When food runs short, hungry populations shrink. When a predator disappears, its prey can grow too fast and eat too much of what <em>they</em> depend on.</div>
+  </div>
+  <div class="card tint" style="--c:var(--butter)">
+    <h3>Competition</h3>
+    <p>Living things <b>compete</b> when they need the same limited resource: food, water, light, space, or mates.</p>
+    <ul class="k"><li><b>Same species</b> competing → intraspecific. (Two deer fighting over one patch of grass.)</li>
+    <li><b>Different species</b> competing → interspecific. (A deer and a rabbit both wanting that grass.)</li></ul>
+    <p>Competition is <b>not</b> hunting, and it’s <b>not</b> a partnership. Nobody has to eat anybody.</p>
+  </div>
+  <details><summary>Using evidence to reach a conclusion</summary><div class="inner">
+    <p>Some questions give you a real story and ask what it <b>proves</b>. Good scientists pick the conclusion that the story actually supports, nothing more. Watch out for words like <b>“always”</b> and <b>“never”</b>. One story rarely proves that. Ask: <em>what changed, what happened next, and which choice explains it without stretching?</em></p></div></details>
+
+  <div class="quiz" id="q4"><h3>🍓 Mini-quiz: Balance &amp; Competition</h3></div>
+</section>
+
+<!-- T5 -->
+<section id="t5">
+  <div class="title"><span class="ic" style="--c:var(--pink)">🤝</span><h2>Living Together (Symbiosis)</h2></div>
+  <div class="card">
+    <p><b>Symbiosis</b> means two different species living in a close, long-term relationship. There are three kinds. Decide by asking: <b>who gains, who loses?</b></p>
+  </div>
+  <div class="tbl">
+    <div style="--c:var(--mint)"><b>💚 Mutualism</b>Both benefit.<br>Bee gets nectar, flower gets pollinated.</div>
+    <div style="--c:var(--butter)"><b>💛 Commensalism</b>One benefits, the other is not affected (not helped, not harmed).<br>A bird nests in a tree.</div>
+    <div style="--c:#ffd0da"><b>💔 Parasitism</b>One benefits, the other is harmed.<br>A tick feeding on a dog.</div>
+  </div>
+  <details><summary>Parasitism or predation? Both involve “harm.”</summary><div class="inner">
+    <p>A predator kills and eats its prey quickly. A parasite usually lives on or inside its host and takes from it over time, often without killing it right away. Symbiosis is about a <b>close, living-together</b> relationship.</p></div></details>
+  <details><summary>Symbiosis vs. competition: not the same</summary><div class="inner">
+    <p>Symbiosis is between <b>different</b> species who live together closely. Competition is about fighting over the <b>same resource</b>, and it can happen within a species or between species.</p></div></details>
+
+  <div class="quiz" id="q5"><h3>🐠 Mini-quiz: Partners</h3></div>
+</section>
+
+<!-- T7 -->
+<section id="t7">
+  <div class="title"><span class="ic" style="--c:var(--sky)">🐟</span><h2>Pond Spotlight</h2></div>
+  <div class="card tint" style="--c:var(--sky)">
+    <p>A pond is a perfect mini-ecosystem. Everything you’ve learned shows up here at once: producers, consumers, decomposers, and the nonliving things that hold them together.</p>
+    <div class="chain"><span style="--c:#e4f8d7">🌿 Algae &amp; water lilies</span><em>➜</em><span style="--c:var(--butter)">🐌 Snail</span><em>➜</em><span style="--c:var(--peach)">🐸 Frog</span><em>➜</em><span style="--c:var(--lav)">🦢 Heron</span></div>
+  </div>
+  <div class="card">
+    <h3>🧺 Tap to sort</h3>
+    <p>Tap each pond item until it says <b>biotic</b> or <b>abiotic</b>, then check yourself.</p>
+    <div class="opts" id="sortBox" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr))"></div>
+    <p><button class="btn" id="sortChk">Check my sorting</button></p><p class="fb" id="sortFb" aria-live="polite"></p>
+  </div>
+  <details><summary>What happens when a pond’s water level drops a lot?</summary><div class="inner">
+    <p>Water is an <b>abiotic</b> factor that every pond resident relies on, so a big drop ripples through the whole community.</p>
+    <div class="chain"><span style="--c:var(--sky)">💧 water shrinks</span><em>➜</em><span style="--c:#e4f8d7">🌿 plants dry out or lose light and nutrients</span><em>➜</em><span style="--c:var(--butter)">🐌 plant-eaters lose food and shelter</span><em>➜</em><span style="--c:var(--peach)">🦢 animals that eat them lose food</span></div>
+    <ul class="k"><li>Animals that can move (frogs, birds, insects) may <b>leave</b>.</li><li>Animals that can’t (fish, snails) get <b>crowded</b> into less space and <b>compete</b> harder for food and oxygen.</li><li>Warmer, shallower water holds less oxygen, which is harder on animals that breathe it.</li></ul>
+    <div class="tip">💡 Good explanations follow the chain: change in a nonliving factor → producers → consumers → everyone else.</div></div></details>
+  <div class="quiz" id="q7"><h3>🪷 Mini-quiz: Pond Life</h3></div>
+</section>
+
+<!-- T8 -->
+<section id="t8">
+  <div class="title"><span class="ic" style="--c:var(--peach)">🔍</span><h2>Tricky Pairs</h2></div>
+  <p>These ideas are easy to mix up. Read each pair, then test yourself.</p>
+  <div class="tbl">
+    <div style="--c:var(--peach)"><b>Scavenger vs. Decomposer</b>Scavenger: an animal that eats dead animals it didn’t kill. Decomposer: tiny recyclers that break dead matter into nutrients.</div>
+    <div style="--c:#e4f8d7"><b>Biotic vs. Abiotic</b>Biotic includes once-living things (dead leaves, logs). Abiotic was never alive (water, rocks, sunlight, soil minerals).</div>
+    <div style="--c:var(--butter)"><b>Same-species vs. other-species</b>Fighting over a resource inside one species is same-species competition. Between different species it’s competition too, just between species.</div>
+    <div style="--c:var(--pink)"><b>Competition vs. Symbiosis</b>Competition is about a shared limited resource. Symbiosis is two species living closely together.</div>
+    <div style="--c:var(--mint)"><b>Commensalism vs. Mutualism</b>Mutualism: both gain. Commensalism: one gains and the other is <em>unaffected</em>: no help, no harm.</div>
+    <div style="--c:#ffd0da"><b>Commensalism vs. Parasitism</b>Check the second species. Unaffected means commensalism. Harmed means parasitism.</div>
+  </div>
+  <div class="quiz" id="q8"><h3>🕵️ Mini-quiz: Spot the Difference</h3></div>
+</section>
+
+<!-- T9 -->
+<section id="t9">
+  <div class="title"><span class="ic" style="--c:var(--butter)">⌨️</span><h2>Type It</h2></div>
+  <p>Type your answer and press Check. For the “fix the word” sentences, type <b>TRUE</b> if the sentence is already correct. If not, type the word that makes it true. Spelling counts!</p>
+  <div class="quiz" id="q9"><h3>✏️ Recall Practice</h3></div>
+</section>
+
+<!-- T6 -->
+<section id="t6">
+  <div class="title"><span class="ic" style="--c:var(--lav)">🔬</span><h2>Think Like a Scientist</h2></div>
+  <div class="card tint" style="--c:var(--sky)">
+    <h3>The fair test</h3>
+    <p>To find out whether <b>one thing</b> makes a difference, change <b>only that one thing</b>. Keep everything else the same. If two things change at once, you can’t tell which one caused the result.</p>
+    <ul class="k"><li><b>Changed variable</b>: the thing you test.</li><li><b>Controlled variables</b>: everything you keep the same.</li><li><b>Measured result</b>: what you observe.</li></ul>
+  </div>
+  <div class="quiz" id="q6"><h3>🧪 Mini-quiz: Fair Tests</h3></div>
+
+  <div class="card">
+    <h3>✍️ Cause-and-effect practice</h3>
+    <p>Long answers are easier when you build a chain. Try this one: <b>a long dry spell dries up most of the water in a lake.</b> Explain how this can affect the plants and animals that live there. Write 2–3 complete sentences, then compare with the checklist.</p>
+    <textarea id="essay" aria-label="Your answer" placeholder="Start with what happens first, then what it causes next…"></textarea>
+    <p><button class="btn" id="chk">Open my checklist</button></p>
+    <div class="check hide" id="checklist">
+      <p>Did your answer include some of these ideas? Tick the ones you covered:</p>
+      <label><input type="checkbox"> Named the nonliving factor that changed (less water)</label>
+      <label><input type="checkbox"> Said what that does to the plants (they dry out or die)</label>
+      <label><input type="checkbox"> Linked it to the animals (less food, less space, less shelter)</label>
+      <label><input type="checkbox"> Mentioned a result such as more competition, animals moving away, or fewer animals</label>
+      <label><input type="checkbox"> Used complete sentences with “because” or “so”</label>
+      <p class="tip">The same chain-building trick works for any change to a habitat. Name the change, follow it to the producers, then follow it up the food chain.</p>
+    </div>
+  </div>
+</section>
+
+<footer>Made with 🍓 for Science 6 · Keep curious!</footer>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const TERMS=[
+["Ecosystem","Living and nonliving things in an area that interact with each other.","var(--mint)"],
+["Producer","Makes its own food through photosynthesis.","#e4f8d7"],
+["Consumer","Gets energy by eating other living things.","var(--butter)"],
+["Herbivore · Carnivore · Omnivore","Eats plants only · eats animals only · eats both.","var(--peach)"],
+["Scavenger","An animal that eats dead animals it didn’t kill.","var(--peach)"],
+["Decomposer","Breaks down dead matter and returns nutrients to the soil.","var(--lav)"],
+["Food chain","A line showing who eats whom and how energy moves.","var(--butter)"],
+["Primary · Secondary · Tertiary","1st, 2nd, and 3rd consumers counted from the producer.","var(--sky)"],
+["Biotic","Living, or once living, parts of an ecosystem.","#e4f8d7"],
+["Abiotic","Nonliving parts, such as sunlight, water, air, and rocks.","var(--sky)"],
+["Loam soil","Rich soil of sand, clay, and decayed matter; great for crops.","#f3dfc9"],
+["Predator · Prey","The hunter · the animal being hunted.","var(--peach)"],
+["Competition","Struggle between living things for the same limited resource.","var(--butter)"],
+["Same-species competition","Competition among members of one species (intraspecific).","var(--pink)"],
+["Symbiosis","A close, long-term relationship between two species.","var(--pink)"],
+["Mutualism","Symbiosis where both species benefit.","var(--mint)"],
+["Commensalism","Symbiosis where one benefits and the other is unaffected.","var(--butter)"],
+["Parasitism","Symbiosis where one benefits and the other is harmed.","#ffd0da"],
+["Variable","A factor that can change in an experiment.","var(--lav)"],
+["Drought","A long period with very little rain.","var(--sky)"],
+["Photosynthesis","How plants use light, water, and carbon dioxide to make food.","#e4f8d7"],
+["Habitat","The place where an organism lives and finds what it needs.","var(--mint)"],
+["Host","The living thing a parasite lives on or in, and harms.","#ffd0da"],
+["Nutrients","Materials living things need to grow; recycled by decomposers.","var(--lav)"]
+];
+$("#termGrid").innerHTML=TERMS.map(t=>`<button class="flip" style="--c:${t[2]}" aria-label="${t[0]}, tap to flip"><div><span class="f">${t[0]}<small>tap to flip</small></span><span class="b">${t[1]}</span></div></button>`).join("");
+document.querySelectorAll(".flip").forEach(b=>b.onclick=()=>b.classList.toggle("on"));
+
+const Q={
+q1:[
+["Which organism makes its own food using sunlight?",["frog","fern","mushroom","cricket"],1,"A fern is a plant, and plants are producers."],
+["What is the main role of decomposers in a forest?",["They make food using sunlight.","They hunt and eat live animals.","They break down dead plants and animals and recycle nutrients.","They eat only the dead animals that other animals have killed."],2,"Decomposers recycle nutrients back into the soil."],
+["Why do plants need sunlight?",["to attract bees","to make their own food","to keep their leaves wet","to stay warm at night"],1,"Light powers photosynthesis, which is how plants make food."],
+["Crows pick at an animal that was hit by a truck. What are the crows in this case?",["Producers","Decomposers","Scavengers","Primary consumers"],2,"They’re animals eating a dead animal they did not kill."]],
+q2:[
+["In the food chain Grass → Grasshopper → Frog → Snake, the frog is the _____.",["producer","tertiary consumer","primary consumer","secondary consumer"],3,"Grasshopper is primary, so the frog is secondary."],
+["In the food chain Algae → Tadpole → Fish → Heron, the heron is the _____.",["producer","tertiary consumer","primary consumer","secondary consumer"],1,"Tadpole is primary, fish is secondary, heron is tertiary."],
+["Which arrow shows energy moving the right way?",["Hawk → Mouse","Mouse → Seeds","Seeds → Mouse","Snake → Mouse"],2,"Arrows point toward the eater."]],
+q3:[
+["Which of the following is an abiotic factor?",["moss","sunlight","snail","rotting wood"],1,"Sunlight was never alive."],
+["Which group contains only abiotic factors of a river ecosystem?",["ducks and fish","water, ducks, and pebbles","water, sunlight, and pebbles","sunlight, mud, and bacteria"],2,"Ducks and bacteria are living, so they don’t belong."],
+["Which of the following is a biotic factor?",["pebbles","fallen branches","wind","rainwater"],1,"Fallen branches were once part of a living tree."]],
+q4:[
+["What is competition among living things?",["Living things struggling for the same resource.","A hunter catching and eating its prey.","One organism living on another and harming it.","Two different species living together and helping each other."],0,"Competition is a struggle over the same limited resource."],
+["The number of mice (prey) in a field suddenly drops. What will most likely happen to the number of owls (predators) soon after?",["It will stay the same.","It will rise because mice are easier to find.","It will also decrease because there is less food.","It will increase because owls now compete with fewer mice."],2,"Less food means fewer predators."],
+["When sea otters returned to a bay in 1990, sea urchin numbers dropped and kelp grew back. Which conclusion is best supported by the statement?",["Sea otters are harmful to kelp.","Urchins do not need food to survive.","Removing predators always helps other animals.","Predators help keep the whole ecosystem balanced."],3,"The story shows predators keeping the community in balance."]],
+q5:[
+["What is symbiosis?",["a close partnership between two species","the nonliving parts of an ecosystem","a food chain showing who eats whom","a fight between members of the same species for food"],0,"Symbiosis is a close, long-term relationship between two species."],
+["A small fish eats food scraps drifting off a sea turtle without helping or harming the turtle. Which type of symbiosis is this, and why?",["mutualism, because both species benefit","parasitism, because one species is harmed","predation, because the fish eats the turtle","commensalism, because one benefits and the other is unaffected"],3,"One benefits and the other is unaffected."],
+["Bees collect nectar and the flowers get pollinated. Which type of symbiosis is this?",["Mutualism","Commensalism","Parasitism","Competition"],0,"Both benefit."]],
+q6:[
+["Ben wants to find out whether sandy soil or loam soil is better for growing mung bean plants. Which setup is the best test?",["plant mung beans in sandy soil only","plant mung beans in both soils, with the same light and water","plant mung beans in both soils, but give them different amounts of light","plant different seeds in each soil and give them different amounts of water"],1,"Only the soil should change."],
+["In Ben’s test, which is a controlled variable?",["type of soil","amount of water","which plant grew taller","number of leaves at the end"],1,"Water stays the same in every setup."],
+["A student tests two soils but gives each a different amount of sunlight. What’s the problem?",["Nothing, it’s fine","They can’t tell if the soil or the light caused the difference","The plants will die","There’s no variable"],1,"Two things changed, so the test isn’t fair."]],
+q7:[
+["Algae floating on a pond are…",["Consumers","Producers","Scavengers","Parasites"],1,"They make their own food by photosynthesis."],
+["A long drought dries up most of a pond’s water. What is a likely effect on the fish that stay?",["More space and food","More crowding and more competition for oxygen and food","Nothing changes","They become producers"],1,"Less water means less space, so competition rises."],
+["Which of these is biotic?",["A rotting lily pad","Pond water","A smooth stone","Sunlight"],0,"It was once living."],
+["Tadpole numbers drop sharply in a pond. Which animals will likely feel it soon?",["Animals that eat tadpoles","Only the rocks","Nothing is affected","Only the algae"],0,"Less prey means less food for their predators."]],
+q8:[
+["Which statement is correct?",["Scavengers are tiny recyclers, decomposers are large animals","Scavengers are animals eating dead animals, decomposers recycle nutrients","They are exactly the same","Both make their own food"],1,"Scavengers eat dead animals. Decomposers return nutrients to the soil."],
+["In commensalism, what happens to the second species?",["It benefits too","It is harmed","It is neither helped nor harmed","It is eaten"],2,"That ‘unaffected’ part separates it from the other two."],
+["Someone says ‘predators are bad for ecosystems.’ Which evidence weakens that claim most?",["Predators have sharp teeth","Without predators, prey overgrazed and the plants disappeared","Prey are fast","Some predators are large"],1,"It shows predators keeping the community in balance."]],
+q9:[
+["Competition between two different species is called ______.","t",["INTERSPECIFIC","INTERSPECIFIC COMPETITION"],"Different species, same limited resource."],
+["Two lions from the same pride fight over one kill. This kind of competition is called ______.","t",["INTRASPECIFIC","INTRASPECIFIC COMPETITION","SAME SPECIES COMPETITION","SAME-SPECIES COMPETITION"],"Same species, same resource."],
+["A rich mix of sand, clay, and decayed matter that is best for growing crops is called ______.","t",["LOAM","LOAM SOIL"],"Loam holds the right amount of water and nutrients."],
+["Bees get nectar and flowers get pollinated. This type of symbiosis is called ______.","t",["MUTUALISM"],"Both species benefit."],
+["In this symbiotic relationship, one species benefits and the other is not affected. It is called ______.","t",["COMMENSALISM"],"One gains, the other is unaffected."],
+["Hyenas are <u>DECOMPOSERS</u> that feed on dead animals they did not kill.","t",["SCAVENGERS","SCAVENGER"],"Animals that eat dead animals they didn’t kill are scavengers."],
+["Fallen logs and dry leaves are <u>ABIOTIC</u> factors because they were once living.","t",["BIOTIC"],"Once-living things are biotic."],
+["In commensalism, the second species is <u>HELPED</u>.","t",["UNAFFECTED","NOT AFFECTED","NEITHER HELPED NOR HARMED"],"The second species is neither helped nor harmed."],
+["Algae and ferns are <u>PRODUCERS</u> because they make their own food.","t",["TRUE"],"The statement is already correct."]]
+};
+const done=new Set();
+const topics=Object.keys(Q);
+const EMO={q1:"🌱",q2:"🔗",q3:"☀️",q4:"⚖️",q5:"🤝",q6:"🔬",q7:"🐟",q8:"🔍",q9:"⌨️"};
+try{JSON.parse(localStorage.getItem("pp6")||"[]").forEach(k=>done.add(k))}catch(e){}
+function render(){
+  const n=done.size,pct=Math.round(n/topics.length*100);
+  $("#fill").style.width=pct+"%";$("#bar").setAttribute("aria-valuenow",pct);
+  $("#stamps").textContent=n?[...done].map(k=>EMO[k]).join(" ")+(n===topics.length?"  🎉 All stickers! You’re ready!":""):"Nothing yet. Let’s begin!";
+  try{localStorage.setItem("pp6",JSON.stringify([...done]))}catch(e){}
+}
+topics.forEach(id=>{
+  const box=document.getElementById(id);let right=new Set();
+  Q[id].forEach((it,qi)=>{
+    const d=document.createElement("div");d.className="q";
+    if(it[1]==="t"){d.innerHTML=`<p>${it[0]}</p><div style="display:flex;gap:8px;flex-wrap:wrap"><input class="ti" aria-label="Your answer" autocomplete="off"><button class="btn ck">Check</button></div><p class="fb" aria-live="polite"></p>`;
+      const inp=d.querySelector(".ti"),fb=d.querySelector(".fb"),ck=d.querySelector(".ck");
+      const go=()=>{const v=inp.value.trim().toUpperCase().replace(/[.!]/g,"").replace(/\s+/g," ");if(!v)return;
+        if(it[2].includes(v)){inp.disabled=true;ck.disabled=true;fb.className="fb ok";fb.textContent="✨ Yes! "+it[3];right.add(qi);if(right.size===Q[id].length){done.add(id);render()}}
+        else{fb.className="fb no";fb.textContent="Not quite. Check your spelling or think again, then retry."}};
+      ck.onclick=go;inp.onkeydown=e=>{if(e.key==="Enter")go()};box.appendChild(d);return}
+    d.innerHTML=`<p>${it[0]}</p><div class="opts"></div><p class="fb" aria-live="polite"></p>`;
+    const o=d.querySelector(".opts"),fb=d.querySelector(".fb");
+    it[1].forEach((t,i)=>{
+      const b=document.createElement("button");b.className="opt";b.textContent=t;
+      b.onclick=()=>{
+        if(i===it[2]){b.classList.add("right");o.querySelectorAll(".opt").forEach(x=>x.disabled=true);
+          fb.className="fb ok";fb.textContent="✨ Yes! "+it[3];right.add(qi);
+          if(right.size===Q[id].length){done.add(id);render()}}
+        else{b.classList.add("wrong");b.disabled=true;fb.className="fb no";fb.textContent="Not quite. Think about it and try another."}
+      };o.appendChild(b)});
+    box.appendChild(d)});
+  const r=document.createElement("button");r.className="btn";r.textContent="Try again";
+  r.onclick=()=>{box.querySelectorAll(".q").forEach(q=>{q.querySelectorAll(".opt").forEach(x=>{x.disabled=false;x.className="opt"});q.querySelectorAll(".ti").forEach(x=>{x.disabled=false;x.value=""});q.querySelectorAll(".ck").forEach(x=>x.disabled=false);q.querySelector(".fb").textContent=""});right=new Set()};
+  box.appendChild(r);
+});
+const SORT=[["🌿 Water lily",1],["💧 Water",0],["🪨 Rocks",0],["🐟 Fish",1],["☀️ Sunlight",0],["🍂 Dead leaves",1],["🦠 Bacteria",1],["🌡️ Temperature",0],["🐸 Frog",1],["🪵 Rotting log",1]];
+const SL=["❓ not sorted","🐞 biotic","🪨 abiotic"],sb=$("#sortBox");
+SORT.forEach(x=>{const b=document.createElement("button");b.className="opt";b.dataset.st=0;b.textContent=x[0]+" · "+SL[0];
+b.onclick=()=>{const st=(+b.dataset.st+1)%3;b.dataset.st=st;b.className="opt";b.textContent=x[0]+" · "+SL[st]};sb.appendChild(b)});
+$("#sortChk").onclick=()=>{let bad=0;[...sb.children].forEach((b,i)=>{const st=+b.dataset.st,ok=(st===1&&SORT[i][1]===1)||(st===2&&SORT[i][1]===0);b.className="opt "+(ok?"right":(st?"wrong":""));if(!ok)bad++});
+const f=$("#sortFb");f.className="fb "+(bad?"no":"ok");f.textContent=bad?"Some need another look. Hint: was it ever alive?":"🎉 All sorted correctly!"};
+$("#chk").onclick=()=>$("#checklist").classList.remove("hide");
+render();
+</script>
+</body>
+</html>

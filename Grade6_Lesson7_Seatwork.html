@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seatwork · Force, Work, and Machines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#4a3b52;--soft:#7b6a85;--bg:#fff7f0;--peach:#ffd9c7;--mint:#c9f0dc;--lav:#e2d6ff;--butter:#fff1b8;--sky:#cfeafe;--pink:#ffcfe3;--pop:#ff8fb1;--good:#2e9e6b;--bad:#d9577a;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Nunito,system-ui,sans-serif;
+background-image:radial-gradient(#ffe3d3 2px,transparent 2px);background-size:26px 26px}
+h1,h2,h3,.fun{font-family:Fredoka,"Trebuchet MS",system-ui,sans-serif;font-weight:600;line-height:1.2;margin:0}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px}
+nav{position:sticky;top:0;z-index:5;background:#fff7f0ee;backdrop-filter:blur(6px);border-bottom:3px dotted var(--peach)}
+nav .wrap{display:flex;gap:8px;overflow-x:auto;padding:10px 18px;scrollbar-width:none}
+nav a{white-space:nowrap;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:99px;padding:3px 14px;font:500 15px Fredoka,sans-serif;box-shadow:0 3px 0 var(--ink)}
+nav a:hover,nav a:focus-visible{background:var(--butter);outline:none}
+header{text-align:center;padding:38px 0 18px}
+.critters{font-size:44px;letter-spacing:6px}
+.critters span{display:inline-block;animation:hop 2.4s ease-in-out infinite}
+.critters span:nth-child(2){animation-delay:.3s}.critters span:nth-child(3){animation-delay:.6s}.critters span:nth-child(4){animation-delay:.9s}.critters span:nth-child(5){animation-delay:1.2s}
+@keyframes hop{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-14px) rotate(-6deg)}}
+h1{font-size:clamp(32px,7vw,52px);margin:8px 0}
+.sub{max-width:560px;margin:0 auto;color:var(--soft)}
+.tracker{background:#fff;border:3px solid var(--ink);border-radius:24px;box-shadow:0 6px 0 var(--ink);padding:14px 18px;margin:22px auto 0;max-width:560px}
+.bar{height:16px;background:var(--lav);border-radius:99px;overflow:hidden;margin:8px 0;border:2px solid var(--ink)}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pop),#ffb86b);transition:width .5s}
+.stamps{font-size:26px;letter-spacing:4px;min-height:36px}
+section{margin:44px 0}
+.title{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.title .ic{font-size:34px;background:var(--c,var(--butter));border:3px solid var(--ink);border-radius:18px;padding:2px 10px;box-shadow:0 4px 0 var(--ink)}
+h2{font-size:clamp(24px,5vw,32px)}
+.card{background:#fff;border:3px solid var(--ink);border-radius:24px;box-shadow:0 6px 0 var(--ink);padding:18px 20px;margin:14px 0}
+.card.tint{background:var(--c)}
+.card h3{font-size:20px;margin-bottom:4px}
+.card p{margin:6px 0}
+.tip{background:var(--butter);border:2px dashed var(--ink);border-radius:16px;padding:8px 14px;margin:12px 0 0;font-weight:600}
+details{background:#fff;border:3px solid var(--ink);border-radius:20px;margin:12px 0;box-shadow:0 5px 0 var(--ink)}
+summary{cursor:pointer;padding:12px 18px;font:500 19px Fredoka,sans-serif;list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";background:var(--pop);color:#fff;border-radius:50%;width:28px;height:28px;display:grid;place-items:center;flex:none;font-size:18px}
+details[open] summary::after{content:"－"}
+summary:focus-visible,button:focus-visible,.flip:focus-visible,textarea:focus-visible{outline:4px solid var(--pop);outline-offset:2px}
+.inner{padding:0 18px 16px}
+ul.k{padding-left:20px;margin:6px 0}
+.tbl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:10px 0}
+.tbl>div{border:2px solid var(--ink);border-radius:18px;padding:10px 14px;background:var(--c)}
+.tbl b{font-family:Fredoka,sans-serif;font-size:18px;display:block}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0;font-weight:700}
+.chain span{background:var(--c,var(--mint));border:2px solid var(--ink);border-radius:14px;padding:4px 12px}
+.chain em{font-style:normal;color:var(--pop);font-size:22px}
+/* flip cards */
+.terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.flip{perspective:700px;height:150px;cursor:pointer;background:none;border:0;padding:0;font:inherit;color:inherit;text-align:center}
+.flip>div{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip.on>div{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border:3px solid var(--ink);border-radius:22px;box-shadow:0 5px 0 var(--ink);display:flex;align-items:center;justify-content:center;padding:10px;flex-direction:column}
+.flip .f{background:var(--c);font:500 21px Fredoka,sans-serif}
+.flip .f small{font:600 13px Nunito;color:var(--soft);margin-top:6px}
+.flip .b{background:#fff;transform:rotateY(180deg);font-size:14.5px;line-height:1.4;overflow:auto}
+/* quiz */
+.quiz{background:var(--lav);border:3px solid var(--ink);border-radius:24px;padding:16px 18px;margin:18px 0}
+.quiz h3{font-size:20px;margin-bottom:8px}
+.q{background:#fff;border:2px solid var(--ink);border-radius:18px;padding:12px 14px;margin:10px 0}
+.q p{margin:0 0 8px;font-weight:700}
+.opts{display:grid;gap:8px}
+.opt{font:600 16px Nunito,sans-serif;text-align:left;background:var(--bg);color:var(--ink);border:2px solid var(--ink);border-radius:14px;padding:8px 12px;cursor:pointer}
+.opt:hover:not(:disabled){background:var(--butter)}
+.opt.right{background:var(--mint);border-color:var(--good)}
+.opt.wrong{background:#ffd9e4;border-color:var(--bad);animation:shake .3s}
+.opt:disabled{cursor:default}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.fb{margin:8px 0 0;font-weight:600;min-height:0}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.btn{font:500 17px Fredoka,sans-serif;background:var(--pop);color:#fff;border:3px solid var(--ink);border-radius:99px;padding:6px 20px;box-shadow:0 4px 0 var(--ink);cursor:pointer}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+textarea{width:100%;min-height:110px;border:3px solid var(--ink);border-radius:18px;padding:10px 12px;font:16px Nunito,sans-serif;color:var(--ink);background:#fff;resize:vertical}
+.check label{display:block;background:#fff;border:2px solid var(--ink);border-radius:14px;padding:6px 12px;margin:8px 0;cursor:pointer;font-weight:600}
+.check input{accent-color:var(--pop);margin-right:8px}
+.ti{flex:1;min-width:160px;border:2px solid var(--ink);border-radius:14px;padding:8px 12px;font:600 16px Nunito,sans-serif;text-transform:uppercase;color:var(--ink);background:var(--bg)}
+.hide{display:none}
+footer{text-align:center;color:var(--soft);padding:10px 0 50px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+.item{background:#fff;border:3px solid var(--ink);border-radius:22px;box-shadow:0 5px 0 var(--ink);padding:14px 16px;margin:16px 0}
+.item.ok{background:#f1fdf6}.item.no{background:#fff3f7}
+.item h3{font-size:19px;line-height:1.35;margin-bottom:10px;display:flex;gap:10px}
+.num{flex:none;background:var(--pop);color:#fff;border:2px solid var(--ink);border-radius:50%;width:34px;height:34px;display:grid;place-items:center;font:600 16px Fredoka,sans-serif}
+.opt.sel{background:var(--lav);border-color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.field{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0 0}
+.field input{border:3px solid var(--ink);border-radius:16px;padding:8px 14px;font:600 16px Nunito,sans-serif;color:var(--ink);background:#fff;min-width:220px}
+.score{text-align:center;background:var(--butter);border:3px solid var(--ink);border-radius:26px;box-shadow:0 6px 0 var(--ink);padding:20px;margin:22px 0}
+.score .big{font:600 56px Fredoka,sans-serif;color:var(--pop);line-height:1}
+.actions{text-align:center;margin:24px 0}
+.actions .btn{margin:6px}
+.prog{position:sticky;top:0;z-index:5;background:#fff7f0ee;border-bottom:3px dotted var(--peach);padding:8px 0;text-align:center;font:500 16px Fredoka,sans-serif}
+.dir{background:var(--sky);border:3px solid var(--ink);border-radius:20px;padding:10px 16px;margin-top:20px;text-align:center}
+@media print{.prog,.actions{display:none}.item,.score{box-shadow:none}body{background:#fff}}
+</style>
+</head><body>
+<div class="prog" id="prog" aria-live="polite">Answered 0 of 20</div>
+<div class="wrap">
+<header>
+ <div class="critters" aria-hidden="true"><span>🤖</span><span>⚙️</span><span>🪨</span><span>🚩</span><span>🛠️</span></div>
+ <h1>Inventor’s Seatwork</h1>
+ <p class="sub">Grade 6 Science · Day 1: Force, Work, and Machines</p>
+ <div class="dir"><b>Directions:</b> Tap the best answer in Parts I and II. In Part III, type your answer. When you’re done, press <b>Check my answers</b>.</div>
+ <div class="field"><input id="nm" maxlength="60" placeholder="Your name" aria-label="Your name" autocomplete="off"><input id="sec" maxlength="30" placeholder="Grade and section" aria-label="Grade and section" autocomplete="off"></div>
+</header>
+<main id="list"></main>
+<div class="score hide" id="score" aria-live="polite"></div>
+<div class="actions"><button class="btn" id="sub">Check my answers</button><button class="btn hide" id="again" style="background:var(--good)">Try again</button><button class="btn hide" id="print" style="background:var(--soft)">Print</button></div>
+<footer>Made with ⚙️ for Grade 6 Science · Great work, inventor!<br><a href="index.html" style="color:inherit;font-weight:700">← Back to all reviewers</a></footer>
+</div>
+<script>
+/* TEACHER: results are sent to this Google Apps Script Web app URL. */
+const SHEET_URL="https://script.google.com/macros/s/AKfycbz9ly53iyacm-UteS1BYA8IaOxc9gGNh89OpygoNiPCOlhHFQvGFYtx3wCql0BYnE952g/exec";
+const QUIZ_NAME="Grade 6 - Seatwork (Force, Work, Machines)";
+let attempt=0,payload=null;
+async function sendResult(){
+ const st=document.getElementById("sendst"),rb=document.getElementById("retrysend");
+ if(!st)return;rb.classList.add("hide");
+ if(SHEET_URL.indexOf("PASTE_")===0){st.textContent="Your score is not connected to the teacher’s sheet yet. Please tell your teacher.";return}
+ st.textContent="Sending your score…";
+ try{await fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+  st.textContent="✓ Your score was sent to your teacher."}
+ catch(e){st.textContent="Your score could not be sent. Check your internet, then press Retry sending.";rb.classList.remove("hide")}}
+const $=s=>document.querySelector(s);
+const PARTS={0:["Part I · Multiple Choice","Tap the best answer."],10:["Part II · True or False","Tap True or False."],15:["Part III · Identification","Type the term being described. Spelling counts!"]};
+const MC=(q,o,a,w)=>({t:"mc",q,o,a,w}),TF=(q,a,w)=>({t:"tf",q,o:["True","False"],a:a?0:1,w}),ID=(q,acc,w)=>({t:"id",q,acc,w});
+const IT=[
+MC("What is a force?",["A kind of tool","A push or a pull","The weight of a machine","Something that never moves"],1,"A force is a push or a pull."),
+MC("Which one is a PUSH?",["Opening a drawer","Pulling a wagon","Kicking a ball","Pulling water from a well"],2,"Kicking a ball pushes it away from you. The others are pulls."),
+MC("Which one is a PULL?",["Kicking a ball","Pushing a cart","Pushing open a door","Pulling a wagon"],3,"Pulling a wagon brings it toward you."),
+MC("Which of these is NOT something a force can do?",["Start an object moving","Stop a moving object","Change the shape of an object","Make an object disappear"],3,"Forces can start, stop, speed up, slow down, change direction, or change shape."),
+MC("Work is done when…",["you think hard about a job","a force moves an object in the direction of the force","you hold something still","you look at an object"],1,"Work needs force and movement."),
+MC("In which case is work being done?",["Reading a book","Holding a heavy bag still","Lifting rice onto a table","Pushing a wall that does not move"],2,"Lifting the rice uses force and moves it."),
+MC("A simple machine is…",["a tool with few or no moving parts that makes work easier","a big machine with an engine","a robot that thinks","a tool that makes free energy"],0,"Few parts, big help!"),
+MC("Which is one way a simple machine helps us?",["It makes the load disappear","It can change the direction of a force","It gives us free energy","It makes objects lighter forever"],1,"For example, you pull down on a rope and the bucket goes up."),
+MC("You raise a flag by pulling a rope. What are the effort and the load?",["Effort: the flag. Load: your pull.","Effort: your pull. Load: the flag.","Effort: the rope. Load: the pole.","Effort: the pole. Load: the rope."],1,"Your pull is the effort. The flag is the load."),
+MC("Which is a safe thing to do with tools?",["Ask an adult for help with heavy loads","Use tools for any job you like","Keep fingers near moving parts","Leave tools lying around"],0,"Use tools for their purpose, keep fingers away, ask an adult for heavy loads, and store tools properly."),
+TF("Force is a push or a pull.",true,"True. A force is a push or a pull."),
+TF("Holding a heavy bag still is work.",false,"False. There is force, but nothing moves, so no work is done."),
+TF("Heavier objects need a bigger force to move them.",true,"True. The heavier the object, the bigger the force needed."),
+TF("Machines make free energy.",false,"False. Machines make work easier, but they do not make free energy."),
+TF("The farther you move an object, the more work you do.",true,"True. More distance means more work."),
+ID("It is the unit used to measure force.",["NEWTON","NEWTONS","N"],"Force is measured in newtons (N)."),
+ID("It is the force you apply to a machine.",["EFFORT"],"Effort is the force you apply."),
+ID("It is the object being moved or the work being done.",["LOAD"],"The load is what moves or the work being done."),
+ID("It is a tool with few or no moving parts that makes work easier.",["SIMPLE MACHINE","SIMPLE MACHINES","MACHINE"],"That’s a simple machine."),
+ID("It is done when a force moves an object in the direction of the force.",["WORK"],"Work needs force and movement.")
+];
+const ans=IT.map(()=>null);let locked=false;
+const list=$("#list");
+const norm=v=>(v||"").toUpperCase().replace(/[.!,]/g,"").replace(/\s+/g," ").trim().replace(/^(THE|A|AN) /,"");
+function upd(){const n=ans.filter(x=>x!==null&&x!=="").length;$("#prog").textContent="Answered "+n+" of "+IT.length}
+IT.forEach((it,i)=>{
+ if(PARTS[i]){const h=document.createElement("div");h.className="dir";h.innerHTML="<b>"+PARTS[i][0]+"</b><br>"+PARTS[i][1];list.appendChild(h)}
+ const d=document.createElement("section");d.className="item";d.id="i"+i;
+ d.innerHTML=`<h3><span class="num">${i+1}</span><span>${it.q}</span></h3><div class="opts"></div><p class="fb" aria-live="polite"></p>`;
+ const o=d.querySelector(".opts");
+ if(it.t==="id"){const inp=document.createElement("input");inp.className="ti";inp.setAttribute("aria-label","Your answer for item "+(i+1));inp.autocomplete="off";inp.placeholder="Type your answer";
+  inp.oninput=()=>{if(locked)return;ans[i]=inp.value.trim()||null;upd()};o.style.display="block";o.appendChild(inp)}
+ else it.o.forEach((t,j)=>{const b=document.createElement("button");b.className="opt";b.textContent=t;
+  b.onclick=()=>{if(locked)return;ans[i]=j;[...o.children].forEach(x=>x.classList.remove("sel"));b.classList.add("sel");upd()};o.appendChild(b)});
+ if(it.t==="tf")o.style.gridTemplateColumns="1fr 1fr";
+ list.appendChild(d)});
+$("#sub").onclick=()=>{
+ const nm0=$("#nm").value.trim(),sec0=$("#sec").value.trim();
+ if(!nm0||!sec0){alert("Please type your name and your grade and section first.");(nm0?$("#sec"):$("#nm")).focus();return}
+ const miss=ans.filter(x=>x===null).length;
+ if(miss&&!confirm(miss+" item(s) are not answered yet. Check anyway?"))return;
+ locked=true;let sc=0;const missed=[];
+ IT.forEach((it,i)=>{const d=$("#i"+i),fb=d.querySelector(".fb");let ok;
+  if(it.t==="id"){const inp=d.querySelector(".ti");inp.disabled=true;ok=it.acc.includes(norm(ans[i]));
+   fb.className="fb "+(ok?"ok":"no");fb.textContent=(ok?"✨ Correct! ":"Not quite. Answer: "+it.acc[0]+". ")+it.w}
+  else{const bs=[...d.querySelectorAll(".opt")];
+   bs.forEach((b,j)=>{b.disabled=true;b.classList.remove("sel");if(j===it.a)b.classList.add("right");else if(j===ans[i])b.classList.add("wrong")});
+   ok=ans[i]===it.a;fb.className="fb "+(ok?"ok":"no");fb.textContent=(ok?"✨ Correct! ":(ans[i]===null?"Not answered. ":"Not quite. "))+it.w}
+  if(ok)sc++;else missed.push("Q"+(i+1)+(it.t==="id"&&ans[i]?" [typed: "+String(ans[i]).slice(0,40)+"]":""));d.classList.add(ok?"ok":"no")});
+ const nm=$("#nm").value.trim(),sec=$("#sec").value.trim();
+ const msg=sc===IT.length?"Perfect! You’re a master inventor! 🏆":sc>=IT.length*0.75?"Great job, inventor! 🌟":sc>=IT.length*0.5?"Good try! Review the pink items and try again. 💪":"Keep going! Read the explanations and try again. 🌱";
+ $("#score").innerHTML=`<div class="fun">${nm?nm.replace(/</g,"&lt;"):"Inventor"}${sec?" · "+sec.replace(/</g,"&lt;"):""}</div><div class="big">${sc} / ${IT.length}</div><p style="margin:6px 0 0;font-weight:700">${msg}</p><p id="sendst" style="margin:10px 0 0;font-weight:700" aria-live="polite"></p><button class="btn hide" id="retrysend" type="button" style="margin-top:8px">Retry sending</button>`;
+ attempt++;payload={name:nm.slice(0,60),section:sec.slice(0,30),quiz:QUIZ_NAME,score:sc,total:IT.length,answers:"Attempt "+attempt+" | "+(missed.length?"Missed: "+missed.join("; "):"Perfect score")};
+ $("#retrysend").onclick=sendResult;sendResult();
+ $("#score").classList.remove("hide");$("#sub").classList.add("hide");$("#again").classList.remove("hide");$("#print").classList.remove("hide");
+ $("#score").scrollIntoView({behavior:"smooth",block:"center"})};
+$("#again").onclick=()=>{locked=false;ans.fill(null);document.querySelectorAll(".item").forEach(d=>{d.className="item";d.querySelector(".fb").textContent="";d.querySelectorAll(".opt").forEach(b=>{b.disabled=false;b.className="opt"});const t=d.querySelector(".ti");if(t){t.disabled=false;t.value=""}});
+ $("#score").classList.add("hide");$("#sub").classList.remove("hide");$("#again").classList.add("hide");$("#print").classList.add("hide");upd();window.scrollTo({top:0,behavior:"smooth"})};
+$("#print").onclick=()=>window.print();
+</script></body></html>

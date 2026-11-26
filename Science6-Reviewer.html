@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Science 6 Reviewer: Cycles of Matter and Simple Machines</title>
+<style>
+:root{
+  --ink:#14235c;
+  --ink-soft:#4a557f;
+  --paper:#eef4ff;
+  --grid:#d6e2f7;
+  --card:#ffffff;
+  --sun:#ffc933;
+  --sun-soft:#fff1c2;
+  --bio:#17855a;   --bio-tint:#e1f4ea;
+  --mach:#2563c9;  --mach-tint:#e2ecfc;
+  --adv:#d2601a;   --adv-tint:#fde9db;
+  --fair:#7a4fd0;  --fair-tint:#ece4fa;
+  --ok:#15803d;    --ok-tint:#dcf5e4;
+  --no:#c0392b;    --no-tint:#fde3df;
+  --display:Rockwell,"Roboto Slab","Rockwell Nova",Georgia,serif;
+  --body:"Segoe UI","Trebuchet MS",system-ui,-apple-system,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:var(--body);color:var(--ink);font-size:17px;line-height:1.55;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0 0 .5em}
+h1{font-size:clamp(2rem,5.2vw,3.1rem);font-weight:800}
+h2{font-size:clamp(1.5rem,3.4vw,2rem);font-weight:800}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0 0 .8em}
+a{color:inherit}
+.skip{position:absolute;left:-999px;top:0;background:var(--sun);padding:.6em 1em;z-index:50}
+.skip:focus{left:8px;top:8px}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;box-shadow:0 0 0 5px var(--ink)}
+
+/* header */
+.top{background:var(--ink);color:#fff;border-bottom:4px solid var(--sun);position:sticky;top:0;z-index:20}
+.top-in{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-weight:800;font-size:1.15rem;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.brand b{background:var(--sun);color:var(--ink);border-radius:8px;padding:2px 9px;font-size:1rem}
+.nav{display:flex;gap:6px;overflow-x:auto;padding:2px;margin-left:auto;max-width:100%}
+.nav button{
+  font:inherit;font-weight:600;font-size:.95rem;color:#fff;background:transparent;border:2px solid transparent;
+  border-radius:999px;padding:6px 14px;cursor:pointer;white-space:nowrap
+}
+.nav button:hover{border-color:rgba(255,255,255,.55)}
+.nav button[aria-current="page"]{background:var(--sun);color:var(--ink);border-color:var(--sun)}
+
+main{max-width:1080px;margin:0 auto;padding:28px 16px 64px}
+.view[hidden]{display:none}
+
+/* common pieces */
+.card{background:var(--card);border:2.5px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);padding:20px}
+.btn{
+  font:inherit;font-weight:700;color:var(--ink);background:var(--sun);border:2.5px solid var(--ink);border-radius:12px;
+  padding:9px 18px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .08s,box-shadow .08s
+}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.btn.alt{background:#fff}
+.btn.ok{background:var(--ok-tint)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:3px 3px 0 var(--ink)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.muted{color:var(--ink-soft)}
+.chip{
+  font:inherit;font-weight:600;font-size:.92rem;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:999px;
+  padding:4px 14px;cursor:pointer
+}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff}
+.t-bio{--accent:var(--bio);--tint:var(--bio-tint)}
+.t-mach{--accent:var(--mach);--tint:var(--mach-tint)}
+.t-adv{--accent:var(--adv);--tint:var(--adv-tint)}
+.t-fair{--accent:var(--fair);--tint:var(--fair-tint)}
+.tag{display:inline-block;background:var(--tint);color:var(--accent);border:2px solid var(--accent);border-radius:8px;padding:0 9px;font-weight:700;font-size:.85rem}
+
+/* hero + lever lab */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:28px;align-items:center;margin-bottom:34px}
+.hero p.lead{font-size:1.15rem;max-width:34em}
+.lab h2{font-size:1.2rem;margin-bottom:.3em}
+.lab svg{width:100%;height:auto;display:block;background:var(--sky,#f6faff);border:2px solid var(--ink);border-radius:10px}
+.lab label{font-weight:700;display:block;margin:12px 0 4px}
+.lab input[type=range]{width:100%;accent-color:var(--mach);height:28px}
+.meter{height:20px;background:#fff;border:2.5px solid var(--ink);border-radius:999px;overflow:hidden}
+.meter i{display:block;height:100%;width:40%;background:var(--sun);border-right:2.5px solid var(--ink);transition:width .2s}
+.lab .says{min-height:3.2em;margin:10px 0 0;font-weight:600}
+.svg-ink{stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+
+/* coverage */
+.cover{margin-bottom:34px}
+.bar{display:flex;border:2.5px solid var(--ink);border-radius:12px;overflow:hidden;margin:12px 0}
+.bar div{padding:10px 8px;font-weight:700;text-align:center;border-right:2.5px solid var(--ink);color:#fff;background:var(--accent)}
+.bar div:last-child{border-right:0}
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:18px;margin-top:18px}
+.comp{border-left:10px solid var(--accent);background:var(--card);display:flex;flex-direction:column;gap:10px}
+.comp h3{margin:0}
+.comp .row{margin-top:auto}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:12px}
+.stat{background:var(--sun-soft);border:2px solid var(--ink);border-radius:10px;padding:10px 12px}
+.stat b{font-family:var(--display);font-size:1.5rem;display:block}
+.tips{margin:0;padding-left:1.2em}
+.tips li{margin-bottom:.4em}
+
+/* notes */
+.notes-nav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 22px}
+.notes-sec{margin-bottom:26px;border-top:10px solid var(--accent)}
+.notes-sec[hidden]{display:none}
+.notes-sec h3{color:var(--accent)}
+.notes-sec ul{padding-left:1.2em;margin:.3em 0 1em}
+.notes-sec li{margin-bottom:.35em}
+.remember{background:var(--sun-soft);border:2px dashed var(--ink);border-radius:10px;padding:10px 14px;margin:12px 0}
+.tbl{width:100%;border-collapse:collapse;margin:10px 0;font-size:.97rem}
+.tbl th,.tbl td{border:2px solid var(--ink);padding:6px 10px;text-align:left;vertical-align:top}
+.tbl th{background:var(--tint);color:var(--ink)}
+.diagram{max-width:520px;margin:10px 0}
+.diagram svg{width:100%;height:auto;border:2px solid var(--ink);border-radius:10px;background:#f6faff}
+.diagram text{font-family:var(--body);font-size:13px;font-weight:700;fill:var(--ink)}
+
+/* flashcards */
+.deck{max-width:640px}
+.flip-wrap{perspective:1200px;margin:16px 0}
+.flip{
+  display:grid;width:100%;min-height:250px;border:0;background:none;padding:0;cursor:pointer;text-align:left;
+  transform-style:preserve-3d;transition:transform .45s;font:inherit;color:inherit
+}
+.flip.is-flipped{transform:rotateY(180deg)}
+.face{
+  grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:2.5px solid var(--ink);border-radius:14px;
+  box-shadow:5px 5px 0 var(--ink);padding:24px;display:flex;flex-direction:column;justify-content:center;gap:10px
+}
+.face.front{background:var(--tint)}
+.face.back{background:#fff;transform:rotateY(180deg)}
+.face .big{font-family:var(--display);font-size:1.7rem;font-weight:800}
+.face .small{font-size:.9rem;color:var(--ink-soft)}
+.known-dot{display:inline-block;width:12px;height:12px;border-radius:50%;border:2px solid var(--ink);background:#fff;margin-right:6px;vertical-align:middle}
+.known-dot.on{background:var(--ok)}
+
+/* quiz */
+.panel{max-width:760px}
+.opt{
+  display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;font:inherit;background:#fff;color:var(--ink);
+  border:2.5px solid var(--ink);border-radius:12px;padding:10px 14px;margin:0 0 10px;cursor:pointer
+}
+.opt:hover:not([disabled]){background:var(--sun-soft)}
+.opt .letter{flex:none;width:30px;height:30px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-weight:800;background:#fff}
+.opt.right{background:var(--ok-tint);border-color:var(--ok)}
+.opt.right .letter{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.wrong{background:var(--no-tint);border-color:var(--no)}
+.opt.wrong .letter{background:var(--no);color:#fff;border-color:var(--no)}
+.opt[disabled]{cursor:default}
+.progress{height:14px;background:#fff;border:2.5px solid var(--ink);border-radius:999px;overflow:hidden;margin:8px 0 16px}
+.progress i{display:block;height:100%;background:var(--accent,var(--mach));width:0;transition:width .25s}
+.why{background:var(--sun-soft);border:2px dashed var(--ink);border-radius:10px;padding:10px 14px;margin:12px 0}
+.why.good{background:var(--ok-tint)}
+.why.bad{background:var(--no-tint)}
+.score-big{font-family:var(--display);font-size:3rem;font-weight:800;line-height:1}
+.missed li{margin-bottom:.6em}
+.breakdown{display:grid;gap:8px;margin:14px 0}
+.breakdown .line{display:grid;grid-template-columns:minmax(120px,1.2fr) 3fr auto;gap:10px;align-items:center}
+.breakdown .track{height:16px;border:2px solid var(--ink);border-radius:999px;background:#fff;overflow:hidden}
+.breakdown .track i{display:block;height:100%;background:var(--accent)}
+select{font:inherit;border:2.5px solid var(--ink);border-radius:10px;padding:6px 10px;background:#fff;color:var(--ink)}
+
+/* fix the word */
+.fix-item{margin-bottom:16px;border-left:10px solid var(--accent)}
+.fix-item mark{background:var(--sun);color:var(--ink);font-weight:800;padding:0 5px;border:2px solid var(--ink);border-radius:6px}
+.fix-item input[type=text],textarea{
+  font:inherit;border:2.5px solid var(--ink);border-radius:10px;padding:8px 12px;background:#fff;color:var(--ink)
+}
+.fix-item input[type=text]{flex:1 1 200px;min-width:0;text-transform:uppercase}
+.fb{margin-top:8px;font-weight:600}
+.fb.good{color:var(--ok)}
+.fb.bad{color:var(--no)}
+
+/* essay */
+textarea{width:100%;min-height:150px;resize:vertical;display:block}
+.scenario{background:var(--tint);border:2px solid var(--accent);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.checks{list-style:none;padding:0;margin:8px 0}
+.checks li{margin-bottom:8px}
+.checks label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.checks input{width:20px;height:20px;margin-top:3px;accent-color:var(--ok)}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr}
+  .nav{margin-left:0;width:100%}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand"><b>Sci 6</b> Reviewer</div>
+    <nav class="nav" aria-label="Sections">
+      <button type="button" data-view="home">Home</button>
+      <button type="button" data-view="notes">Study notes</button>
+      <button type="button" data-view="cards">Flashcards</button>
+      <button type="button" data-view="quiz">Practice quiz</button>
+      <button type="button" data-view="fix">Fix the word</button>
+      <button type="button" data-view="essay">Essay practice</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HOME -->
+<section class="view" id="view-home">
+  <div class="hero">
+    <div>
+      <h1>Cycles of matter and simple machines</h1>
+      <p class="lead">Review for the Second Summative Test in Science 6. Read the notes, flip the cards, then test yourself with practice questions.</p>
+      <div class="row">
+        <button class="btn" type="button" data-go="quiz">Start the quiz</button>
+        <button class="btn alt" type="button" data-go="notes">Read the notes</button>
+      </div>
+    </div>
+    <div class="card lab t-mach">
+      <h2>Try it: where should the fulcrum go?</h2>
+      <svg id="leverSvg" viewBox="0 0 360 200" role="img" aria-label="A lever with a movable fulcrum">
+        <defs>
+          <marker id="arrowInk" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="#14235c"/>
+          </marker>
+        </defs>
+        <rect x="0" y="170" width="360" height="30" fill="#bfe3c9" stroke="#14235c" stroke-width="2.5"/>
+        <g id="plankG">
+          <rect id="plank" x="40" y="112" width="280" height="12" rx="4" fill="#e7b46a" class="svg-ink"/>
+          <rect id="loadBox" x="48" y="76" width="40" height="36" rx="4" fill="#ffc933" class="svg-ink"/>
+        </g>
+        <polygon id="fulcrumTri" points="180,124 158,170 202,170" fill="#7a4fd0" class="svg-ink"/>
+        <text id="loadLbl" x="68" y="60" text-anchor="middle" font-size="14" font-weight="700" fill="#14235c">Load</text>
+        <line id="effortArrow" x1="306" y1="62" x2="306" y2="100" stroke="#14235c" stroke-width="3.5" marker-end="url(#arrowInk)"/>
+        <text id="effortLbl" x="306" y="52" text-anchor="middle" font-size="14" font-weight="700" fill="#14235c">Effort</text>
+        <text id="fulcrumLbl" x="180" y="192" text-anchor="middle" font-size="14" font-weight="700" fill="#14235c">Fulcrum</text>
+      </svg>
+      <label for="fulcrum">Move the fulcrum</label>
+      <input type="range" id="fulcrum" min="12" max="88" value="50" aria-describedby="leverSays">
+      <div class="meter" aria-hidden="true"><i id="meterFill"></i></div>
+      <p class="says" id="leverSays" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="card cover">
+    <h2>What the test covers</h2>
+    <p class="muted">The 20 test items are split across four competencies. Study the biggest parts first.</p>
+    <div class="bar" role="img" aria-label="Test items: cycles of matter 7, simple machines examples 7, advantages and limitations 4, fair tests 2">
+      <div class="t-bio" style="flex:7">7</div>
+      <div class="t-mach" style="flex:7">7</div>
+      <div class="t-adv" style="flex:4">4</div>
+      <div class="t-fair" style="flex:2">2</div>
+    </div>
+    <div class="comp-grid">
+      <article class="card comp t-bio">
+        <span class="tag">7 items</span>
+        <h3>Living things and cycles of matter</h3>
+        <p>How living and non-living things affect each other for good or harm. Water cycle, oxygen and carbon dioxide, decomposers.</p>
+        <div class="row"><button class="btn alt" type="button" data-notes="bio">Notes</button><button class="btn" type="button" data-quiz="bio">Quiz me</button></div>
+      </article>
+      <article class="card comp t-mach">
+        <span class="tag">7 items</span>
+        <h3>Simple machines around us</h3>
+        <p>Examples and uses at home, at school, and in the community. Inclined plane, wedge, lever, pulley.</p>
+        <div class="row"><button class="btn alt" type="button" data-notes="mach">Notes</button><button class="btn" type="button" data-quiz="mach">Quiz me</button></div>
+      </article>
+      <article class="card comp t-adv">
+        <span class="tag">4 items</span>
+        <h3>Advantages and limitations</h3>
+        <p>What each machine makes easier, and what you give up in return.</p>
+        <div class="row"><button class="btn alt" type="button" data-notes="adv">Notes</button><button class="btn" type="button" data-quiz="adv">Quiz me</button></div>
+      </article>
+      <article class="card comp t-fair">
+        <span class="tag">2 items</span>
+        <h3>Fair tests with levers</h3>
+        <p>How a lever changes the size and direction of a force, and how to test it fairly.</p>
+        <div class="row"><button class="btn alt" type="button" data-notes="fair">Notes</button><button class="btn" type="button" data-quiz="fair">Quiz me</button></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:34px">
+    <h2>Your progress</h2>
+    <div class="stats" id="stats"></div>
+    <p class="muted" style="margin-top:12px">Progress is saved in this browser only.</p>
+  </div>
+
+  <div class="card">
+    <h2>How to answer on test day</h2>
+    <ul class="tips">
+      <li>Multiple choice: write the capital letter of your answer on the blank.</li>
+      <li>Identification: write the term in capital letters only.</li>
+      <li>Modified true or false: write TRUE if the statement is correct. If it is not, write the word that replaces the capitalized word.</li>
+      <li>Essay: answer both parts of the question in 2 to 3 complete sentences.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- NOTES -->
+<section class="view" id="view-notes" hidden>
+  <h1>Study notes</h1>
+  <p class="muted">Pick a topic or read them all.</p>
+  <div class="notes-nav" id="notesNav">
+    <button class="chip" type="button" data-filter="all" aria-pressed="true">All topics</button>
+    <button class="chip" type="button" data-filter="bio" aria-pressed="false">Cycles of matter</button>
+    <button class="chip" type="button" data-filter="mach" aria-pressed="false">Simple machines</button>
+    <button class="chip" type="button" data-filter="adv" aria-pressed="false">Advantages and limitations</button>
+    <button class="chip" type="button" data-filter="fair" aria-pressed="false">Fair tests</button>
+  </div>
+
+  <article class="card notes-sec t-bio" data-topic="bio">
+    <h2>Living things and cycles of matter</h2>
+    <h3>Biotic and abiotic factors</h3>
+    <ul>
+      <li><b>Biotic factors</b> are the living things in an ecosystem: plants, animals, fungi, and bacteria.</li>
+      <li><b>Abiotic factors</b> are the non-living things: sunlight, water, air, soil, rocks, and temperature.</li>
+      <li>Dead leaves and logs are biotic because they were once living.</li>
+    </ul>
+    <h3>Interactions can bring good or harm</h3>
+    <table class="tbl">
+      <tr><th>Brings good</th><th>Brings harm</th></tr>
+      <tr><td>Sunlight, water, and soil help plants grow. A bee gets nectar while it carries pollen between flowers.</td><td>Garbage and chemicals pollute a river and harm fish. Cutting trees removes shelter and lets rain wash the soil away. A long drought dries up water.</td></tr>
+    </table>
+    <h3>The water cycle</h3>
+    <div class="diagram">
+      <svg viewBox="0 0 360 210" role="img" aria-label="Water cycle: evaporation, condensation, precipitation, collection">
+        <defs>
+          <marker id="wcArrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#14235c"/></marker>
+        </defs>
+        <circle cx="48" cy="40" r="20" fill="#ffc933" class="svg-ink"/>
+        <g class="svg-ink"><line x1="48" y1="8" x2="48" y2="14"/><line x1="16" y1="40" x2="22" y2="40"/><line x1="74" y1="40" x2="80" y2="40"/><line x1="25" y1="17" x2="29" y2="21"/><line x1="71" y1="17" x2="67" y2="21"/></g>
+        <rect x="0" y="162" width="190" height="48" fill="#9cc7f5" class="svg-ink"/>
+        <polygon points="190,210 190,172 240,150 275,168 310,140 360,175 360,210" fill="#8fd1a8" class="svg-ink"/>
+        <path d="M222 62 a16 16 0 0 1 30 -10 a18 18 0 0 1 34 8 a14 14 0 0 1 -6 28 h-52 a13 13 0 0 1 -6 -26z" fill="#fff" class="svg-ink"/>
+        <path d="M72 158 C 74 128, 90 108, 98 86" fill="none" class="svg-ink" marker-end="url(#wcArrow)"/>
+        <text x="4" y="104" style="font-size:12px">Evaporation</text>
+        <path d="M122 74 C 150 56, 180 56, 208 64" fill="none" class="svg-ink" marker-end="url(#wcArrow)"/>
+        <text x="112" y="46">Condensation</text>
+        <g class="svg-ink"><line x1="238" y1="96" x2="238" y2="118" marker-end="url(#wcArrow)"/><line x1="256" y1="96" x2="256" y2="118" marker-end="url(#wcArrow)"/><line x1="274" y1="96" x2="274" y2="118" marker-end="url(#wcArrow)"/></g>
+        <text x="206" y="140" style="font-size:12px">Precipitation</text>
+        <path d="M200 182 L 150 182" fill="none" class="svg-ink" marker-end="url(#wcArrow)"/>
+        <text x="22" y="198">Collection</text>
+      </svg>
+    </div>
+    <ul>
+      <li><b>Evaporation:</b> the sun heats liquid water and it changes into water vapor.</li>
+      <li><b>Condensation:</b> water vapor cools and changes into tiny droplets that form clouds.</li>
+      <li><b>Precipitation:</b> water falls from the clouds as rain, hail, or snow.</li>
+      <li><b>Collection:</b> water gathers in rivers, lakes, the sea, and underground, and the cycle starts again.</li>
+    </ul>
+    <h3>Oxygen and carbon dioxide</h3>
+    <ul>
+      <li>During photosynthesis, plants take in carbon dioxide and give off oxygen.</li>
+      <li>Animals take in oxygen and give off carbon dioxide.</li>
+      <li>Plants and animals need each other for the air they use.</li>
+    </ul>
+    <h3>Decomposers</h3>
+    <ul>
+      <li>Fungi and bacteria break down dead plants and animals.</li>
+      <li>They return nutrients to the soil, so new plants can grow.</li>
+    </ul>
+    <div class="remember"><b>Remember:</b> matter is used again and again. Water, air, and nutrients move in cycles, and harming one part (like cutting trees or polluting water) affects the living things that depend on it.</div>
+  </article>
+
+  <article class="card notes-sec t-mach" data-topic="mach">
+    <h2>Simple machines around us</h2>
+    <p>A <b>simple machine</b> is a tool with few or no moving parts that makes work easier to do. Simple machines do not use electricity or an engine.</p>
+    <table class="tbl">
+      <tr><th>Machine</th><th>What it looks like</th><th>Examples at home, school, and community</th></tr>
+      <tr><td>Inclined plane</td><td>A flat surface that is slanted</td><td>wheelchair ramp, slide, wooden plank for loading a truck, ramp at the market</td></tr>
+      <tr><td>Wedge</td><td>A thin edge that splits or cuts</td><td>kitchen knife, axe, chisel, nail, doorstop</td></tr>
+      <tr><td>Lever</td><td>A bar that turns on a fixed point</td><td>seesaw, crowbar, claw hammer, bottle opener, scissors</td></tr>
+      <tr><td>Pulley</td><td>A wheel with a rope</td><td>flagpole, well, construction crane, window blinds</td></tr>
+    </table>
+    <h3>Parts of a lever</h3>
+    <ul>
+      <li><b>Fulcrum:</b> the fixed point where the lever turns or rests.</li>
+      <li><b>Effort:</b> the force you apply to make the lever work.</li>
+      <li><b>Load:</b> the object the lever lifts or moves.</li>
+    </ul>
+    <div class="remember"><b>Tip:</b> use the fulcrum slider on the Home page to see how the effort changes.</div>
+  </article>
+
+  <article class="card notes-sec t-adv" data-topic="adv">
+    <h2>Advantages and limitations</h2>
+    <table class="tbl">
+      <tr><th>Machine</th><th>What it makes easier</th><th>What you give up</th></tr>
+      <tr><td>Inclined plane</td><td>A long, gentle ramp needs less effort than lifting straight up.</td><td>The load travels a longer distance and takes more time. A short, steep ramp is harder to push up.</td></tr>
+      <tr><td>Wedge</td><td>A long, thin, sharp wedge splits things with less effort.</td><td>A thick, blunt wedge needs more effort.</td></tr>
+      <tr><td>Pulley</td><td>A single fixed pulley lets you pull down to lift a load up.</td><td>It changes the direction of the force only. It does not make the load easier to lift.</td></tr>
+      <tr><td>Lever</td><td>Pushing farther from the fulcrum makes the load easier to lift.</td><td>You must move through a bigger distance.</td></tr>
+    </table>
+    <div class="remember"><b>Remember:</b> a machine does not make energy and does not do the work by itself. It makes work easier, but you still need to apply effort.</div>
+  </article>
+
+  <article class="card notes-sec t-fair" data-topic="fair">
+    <h2>Fair tests with levers</h2>
+    <ul>
+      <li>A lever can change the <b>size</b> of the force you need and the <b>direction</b> of the force. Pushing down on one end can make the load on the other end go up.</li>
+      <li>Moving the fulcrum closer to the load, or pushing farther from the fulcrum, makes the load easier to lift.</li>
+    </ul>
+    <h3>How to make a test fair</h3>
+    <table class="tbl">
+      <tr><th>Step</th><th>Example: does moving the fulcrum change how hard it is to lift?</th></tr>
+      <tr><td>Change only one thing</td><td>the position of the fulcrum</td></tr>
+      <tr><td>Keep everything else the same</td><td>same ruler, same load, same person pushing</td></tr>
+      <tr><td>Observe or measure</td><td>how hard or easy it is to lift the load each time</td></tr>
+      <tr><td>Repeat and record</td><td>try each position more than once and write down what happened</td></tr>
+    </table>
+    <div class="remember"><b>Why only one change?</b> If two things change at once, you cannot tell which one caused the result.</div>
+  </article>
+</section>
+
+<!-- FLASHCARDS -->
+<section class="view" id="view-cards" hidden>
+  <h1>Flashcards</h1>
+  <p class="muted">Tap the card to flip it. Mark the ones you know.</p>
+  <div class="row" id="cardFilters" style="margin:12px 0">
+    <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
+    <button class="chip" type="button" data-f="bio" aria-pressed="false">Cycles of matter</button>
+    <button class="chip" type="button" data-f="mach" aria-pressed="false">Simple machines</button>
+    <button class="chip" type="button" data-f="adv" aria-pressed="false">Advantages and limitations</button>
+    <button class="chip" type="button" data-f="fair" aria-pressed="false">Fair tests</button>
+    <button class="chip" type="button" data-f="learning" aria-pressed="false">Still learning</button>
+  </div>
+  <div class="deck">
+    <p id="cardCount" class="muted" aria-live="polite"></p>
+    <div class="flip-wrap" id="flipWrap">
+      <button class="flip" id="flipCard" type="button" aria-label="Flashcard, tap to flip">
+        <div class="face front"><span class="small" id="cardTopic"></span><span class="big" id="cardTerm"></span><span class="small">Tap to see the answer</span></div>
+        <div class="face back"><span class="small" id="cardTopic2"></span><span id="cardDef" style="font-size:1.15rem"></span></div>
+      </button>
+    </div>
+    <div class="row">
+      <button class="btn alt" type="button" id="cardPrev">Previous</button>
+      <button class="btn alt" type="button" id="cardNext">Next</button>
+      <button class="btn ok" type="button" id="cardKnow"><span class="known-dot" id="knownDot"></span>I know this</button>
+      <button class="btn alt" type="button" id="cardShuffle">Shuffle</button>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="view" id="view-quiz" hidden>
+  <h1>Practice quiz</h1>
+  <div class="panel" id="quizSetup">
+    <div class="card">
+      <h2>Choose your topics</h2>
+      <div class="row" id="quizTopics" style="margin-bottom:14px">
+        <button class="chip" type="button" data-t="bio" aria-pressed="true">Cycles of matter</button>
+        <button class="chip" type="button" data-t="mach" aria-pressed="true">Simple machines</button>
+        <button class="chip" type="button" data-t="adv" aria-pressed="true">Advantages and limitations</button>
+        <button class="chip" type="button" data-t="fair" aria-pressed="true">Fair tests</button>
+      </div>
+      <div class="row">
+        <label for="quizLen"><b>Number of questions</b></label>
+        <select id="quizLen">
+          <option value="10">10 questions</option>
+          <option value="all">All questions</option>
+          <option value="5">5 questions</option>
+        </select>
+        <button class="btn" type="button" id="quizStart">Start quiz</button>
+      </div>
+      <p class="muted" id="quizNote" style="margin-top:12px"></p>
+    </div>
+  </div>
+  <div class="panel" id="quizPlay" hidden>
+    <div class="card" id="quizCard">
+      <div class="row" style="justify-content:space-between"><span class="tag" id="qTag"></span><span class="muted" id="qCount"></span></div>
+      <div class="progress"><i id="qBar"></i></div>
+      <h3 id="qText" style="font-family:var(--body);font-weight:700;font-size:1.2rem"></h3>
+      <div id="qOpts"></div>
+      <div id="qWhy" aria-live="polite"></div>
+      <div class="row" style="margin-top:8px"><button class="btn" type="button" id="qNext" disabled>Next question</button></div>
+    </div>
+  </div>
+  <div class="panel" id="quizDone" hidden></div>
+</section>
+
+<!-- FIX THE WORD -->
+<section class="view" id="view-fix" hidden>
+  <h1>Fix the word</h1>
+  <p class="muted panel">This works like Modified True or False. Read each statement. If it is correct, type TRUE. If it is not, type the word that replaces the highlighted word.</p>
+  <div class="row" style="margin:10px 0 18px"><span class="stat" id="fixTally"></span><button class="btn alt" type="button" id="fixReset">Start over</button></div>
+  <div class="panel" id="fixList"></div>
+</section>
+
+<!-- ESSAY -->
+<section class="view" id="view-essay" hidden>
+  <h1>Essay practice</h1>
+  <p class="muted panel">The test essay asks two things: what or how, and why. Write your answer in 2 to 3 complete sentences, then check it against the key points.</p>
+  <div class="row" id="essayTabs" style="margin:12px 0 18px"></div>
+  <div class="panel" id="essayBody"></div>
+</section>
+
+</main>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- data ---------- */
+const TOPICS={
+  bio:{name:'Cycles of matter'},
+  mach:{name:'Simple machines'},
+  adv:{name:'Advantages and limitations'},
+  fair:{name:'Fair tests'}
+};
+
+const CARDS=[
+ {t:'bio',term:'Biotic factors',def:`The living things in an ecosystem, such as plants, animals, fungi, and bacteria.`},
+ {t:'bio',term:'Abiotic factors',def:`The non-living things in an ecosystem, such as sunlight, water, air, soil, rocks, and temperature.`},
+ {t:'bio',term:'Evaporation',def:`Liquid water changes into water vapor when the sun heats it.`},
+ {t:'bio',term:'Condensation',def:`Water vapor cools and changes into tiny droplets of liquid water that form clouds.`},
+ {t:'bio',term:'Precipitation',def:`Water falls from the clouds as rain, hail, or snow.`},
+ {t:'bio',term:'Collection',def:`Water gathers in rivers, lakes, the sea, and underground, then the water cycle starts again.`},
+ {t:'bio',term:'Photosynthesis',def:`Plants use sunlight, water, and carbon dioxide to make food, and they give off oxygen.`},
+ {t:'bio',term:'Oxygen and carbon dioxide cycle',def:`Plants give off oxygen that animals breathe. Animals give off carbon dioxide that plants use.`},
+ {t:'bio',term:'Decomposers',def:`Living things, such as fungi and bacteria, that break down dead plants and animals and return nutrients to the soil.`},
+ {t:'bio',term:'An interaction that brings good',def:`A bee gets nectar from a flower while carrying pollen to other flowers. Both the bee and the flower benefit.`},
+ {t:'bio',term:'An interaction that brings harm',def:`Garbage in a river pollutes the water and harms fish. Cutting trees takes away shelter and lets soil wash away.`},
+ {t:'mach',term:'Simple machine',def:`A tool with few or no moving parts that makes work easier to do.`},
+ {t:'mach',term:'Inclined plane',def:`A flat surface that is slanted and used to move loads up or down, such as a ramp.`},
+ {t:'mach',term:'Wedge',def:`A simple machine with a thin edge that splits or cuts things, such as an axe, a knife, or a chisel.`},
+ {t:'mach',term:'Lever',def:`A bar that turns on a fixed point, such as a seesaw, a crowbar, or a claw hammer.`},
+ {t:'mach',term:'Pulley',def:`A wheel with a rope that is used to lift or lower loads, such as on a flagpole or at a well.`},
+ {t:'mach',term:'Fulcrum',def:`The fixed point on which a lever turns or rests.`},
+ {t:'mach',term:'Effort',def:`The force you apply to a simple machine to make it work.`},
+ {t:'mach',term:'Load',def:`The object that a simple machine lifts or moves.`},
+ {t:'adv',term:'Advantage of a long, gentle ramp',def:`It needs less effort to move a load up.`},
+ {t:'adv',term:'Limitation of a ramp',def:`The load has to travel a longer distance, so it takes more time.`},
+ {t:'adv',term:'Best wedge for splitting wood',def:`A long, thin, sharp wedge needs the least effort.`},
+ {t:'adv',term:'What a single fixed pulley does',def:`It changes the direction of the force. It does not make the load easier to lift.`},
+ {t:'adv',term:'Do machines make energy?',def:`No. Machines make work easier, but you still need to apply effort.`},
+ {t:'fair',term:'Fair test',def:`A test where only one thing is changed and everything else is kept the same.`},
+ {t:'fair',term:'What a lever can change',def:`The size (magnitude) of the force needed and the direction of the force.`},
+ {t:'fair',term:'Effort far from the fulcrum',def:`The farther you push from the fulcrum, the easier it is to lift the load.`},
+ {t:'fair',term:'Fulcrum close to the load',def:`When the fulcrum is closer to the load, the load is easier to lift.`},
+ {t:'fair',term:'Why change only one thing?',def:`If two things change at once, you cannot tell which one caused the result.`}
+];
+
+const QUIZ=[
+ {t:'bio',q:`Which of the following is an abiotic factor in an ecosystem?`,o:[`a mango tree`,`sunlight`,`an earthworm`,`a mushroom`],a:1,e:`Sunlight is non-living, so it is abiotic. Trees, earthworms, and mushrooms are living things.`},
+ {t:'bio',q:`Which group has only biotic factors?`,o:[`a frog, a fern, and a snail`,`a frog, soil, and water`,`a fern, sunlight, and air`,`a snail, rocks, and temperature`],a:0,e:`Frogs, ferns, and snails are all living. The other groups include non-living things.`},
+ {t:'bio',q:`What happens during evaporation in the water cycle?`,o:[`Liquid water changes into water vapor.`,`Water vapor changes into tiny droplets.`,`Water falls from the clouds as rain.`,`Water flows into rivers and the sea.`],a:0,e:`The heat of the sun turns liquid water into water vapor, which rises into the air.`},
+ {t:'bio',q:`Tiny water droplets join together to form clouds. Which step of the water cycle is this?`,o:[`condensation`,`evaporation`,`precipitation`,`collection`],a:0,e:`Condensation happens when water vapor cools and changes into tiny droplets of liquid water.`},
+ {t:'bio',q:`Which statement best describes how plants and animals depend on each other for air?`,o:[`Plants give off oxygen for animals to breathe, and animals give off carbon dioxide for plants.`,`Plants give off carbon dioxide for animals to breathe, and animals give off oxygen.`,`Plants and animals both use oxygen, so they do not need each other.`,`Animals take in carbon dioxide and plants take in oxygen to make food.`],a:0,e:`Plants use carbon dioxide and give off oxygen. Animals breathe in that oxygen and breathe out carbon dioxide.`},
+ {t:'bio',q:`Why are decomposers such as fungi and bacteria important in an ecosystem?`,o:[`They break down dead plants and animals and return nutrients to the soil.`,`They make food from sunlight for all other living things.`,`They hunt other animals so that there are fewer predators.`,`They carry pollen from one flower to another.`],a:0,e:`Decomposers recycle matter. The nutrients they release help new plants grow.`},
+ {t:'bio',q:`After a typhoon, a river is filled with plastic waste and many fish die. Which statement best explains this?`,o:[`The waste polluted the water, and the polluted water harmed the fish.`,`The fish died because there were too many plants in the river.`,`The plastic waste gave the fish more food and oxygen.`,`The fish died because the sunlight made the water too clean.`],a:0,e:`Waste is a non-living thing. When it pollutes the water, it harms the living things that need clean water.`},
+ {t:'bio',q:`Mang Lito says, "Cutting all the mangrove trees along the shore will not affect the crabs and fish." Which evaluation is best?`,o:[`Correct, because crabs and fish live only in deep water.`,`Correct, because trees and animals do not depend on each other.`,`Incorrect, because mangroves give shelter and nursery areas to crabs and fish.`,`Incorrect, because mangroves are the only living things on the shore.`],a:2,e:`Mangroves protect the shore and give shelter and breeding places. Removing them harms the animals that depend on them.`},
+ {t:'bio',q:`A bee drinks nectar from a flower and carries pollen to other flowers. What kind of interaction is this?`,o:[`Good for both, because the bee gets food and the flower can make seeds.`,`Harmful to the flower, because the bee takes its food.`,`Harmful to the bee, because the flower holds back its pollen.`,`Good for the bee only, because the flower gets nothing from it.`],a:0,e:`The bee gets food and the flower gets help to make seeds, so both benefit.`},
+ {t:'bio',q:`Which action helps keep matter moving through healthy cycles in a community?`,o:[`planting trees and putting waste in proper bins`,`burning garbage near the river`,`cutting trees without planting new ones`,`pouring used oil into the canal`],a:0,e:`Trees help the water and air cycles, and proper waste disposal keeps soil and water clean.`},
+
+ {t:'mach',q:`Which simple machine is a flat surface that is slanted and used to move loads up or down?`,o:[`an inclined plane`,`a lever`,`a pulley`,`a wedge`],a:0,e:`A ramp is an inclined plane.`},
+ {t:'mach',q:`Which of the following is an example of a lever?`,o:[`a wheelchair ramp`,`a crowbar`,`a flagpole rope`,`a nail`],a:1,e:`A crowbar turns on a fixed point. A ramp is an inclined plane, a flagpole rope uses a pulley, and a nail is a wedge.`},
+ {t:'mach',q:`Which tool is an example of a wedge?`,o:[`a seesaw`,`a flagpole`,`a chisel`,`a ramp`],a:2,e:`A chisel has a thin edge that cuts and splits.`},
+ {t:'mach',q:`Workers pass a rope over a wheel to lift bricks to the second floor of a house. Which simple machine are they using?`,o:[`a pulley`,`a wedge`,`a lever`,`an inclined plane`],a:0,e:`A wheel with a rope is a pulley.`},
+ {t:'mach',q:`Where is the fulcrum of a seesaw?`,o:[`at the middle support where the board turns`,`at the seat of the heavier child`,`at the end where the child pushes up`,`at the ground under the lower seat`],a:0,e:`The fulcrum is the fixed point on which the lever turns.`},
+ {t:'mach',q:`In a lever, what do we call the object that is lifted or moved?`,o:[`load`,`effort`,`fulcrum`,`pulley`],a:0,e:`The load is what the lever lifts or moves. The effort is the force you apply.`},
+
+ {t:'adv',q:`A long, gentle ramp is used instead of a short, steep ramp to load a truck. What is the advantage and the limitation?`,o:[`It needs less effort, but the load must travel a longer distance.`,`It needs more effort, but the load travels a shorter distance.`,`It needs less effort and the load also travels a shorter distance.`,`It needs more effort and the load also travels a longer distance.`],a:0,e:`A gentle ramp trades distance for effort: less effort, but a longer path.`},
+ {t:'adv',q:`Which wedge will split a log with the least effort?`,o:[`a short and thick wedge`,`a wide and blunt wedge`,`a long, thin, and sharp wedge`,`a flat and rounded wedge`],a:2,e:`A thin, sharp wedge cuts into the wood more easily.`},
+ {t:'adv',q:`What does a single fixed pulley at a well do?`,o:[`It changes the direction of the force only.`,`It cuts the effort needed in half.`,`It makes the pail of water weigh less.`,`It gives extra energy to the rope.`],a:0,e:`You pull down to lift the pail up. The pulley does not reduce the effort.`},
+ {t:'adv',q:`Rina says, "A lever gives me extra energy, so I do not need to push at all." Which evaluation is best?`,o:[`Correct, because a lever makes its own force.`,`Correct, because the fulcrum does all the work.`,`Incorrect, because a lever makes work easier but you still need to apply effort.`,`Incorrect, because a lever makes the load heavier to lift.`],a:2,e:`Machines do not make energy. They only make work easier.`},
+
+ {t:'fair',q:`A student pushes down on one end of a lever, and the load on the other end goes up. What does the lever change?`,o:[`the direction of the force`,`the weight of the load`,`the amount of energy`,`the size of the load`],a:0,e:`Pushing down made the load go up, so the direction of the force changed.`},
+ {t:'fair',q:`In a fair test on how the fulcrum's position affects how hard it is to lift a load, which should stay the same?`,o:[`the ruler and the load`,`the position of the fulcrum`,`how hard it is to lift`,`the results of the test`],a:0,e:`Only the fulcrum position should change. The ruler and the load must stay the same.`},
+ {t:'fair',q:`Why is changing the load and the fulcrum position at the same time not a fair test?`,o:[`Two things changed, so you cannot tell which one caused the result.`,`The test takes too long to finish with two changes.`,`A lever cannot be used with different loads.`,`The fulcrum has no effect when the load changes.`],a:0,e:`A fair test changes only one thing at a time.`},
+ {t:'fair',q:`Which procedure is the best fair test of how the fulcrum's position changes how hard it is to lift a load?`,o:[`Use the same board and the same weight, move only the fulcrum each time, and compare how easy it is to lift.`,`Use a different board and weight each time, and move the fulcrum every time.`,`Keep the fulcrum in one place, change the weight each time, and compare how easy it is to lift.`,`Change the weight and the fulcrum together to finish the test faster.`],a:0,e:`Only the fulcrum position changes, and everything else stays the same.`}
+];
+
+const FIX=[
+ {t:'bio',pre:`Fungi and bacteria are `,key:`DECOMPOSERS`,post:` that break down dead plants and animals.`,ans:[`TRUE`]},
+ {t:'bio',pre:`Water vapor cools and forms clouds in a process called `,key:`EVAPORATION`,post:`.`,ans:[`CONDENSATION`]},
+ {t:'bio',pre:`Sunlight, soil, and air are `,key:`BIOTIC`,post:` factors.`,ans:[`ABIOTIC`]},
+ {t:'bio',pre:`During photosynthesis, plants take in `,key:`OXYGEN`,post:` and give off oxygen.`,ans:[`CARBON DIOXIDE`,`CO2`]},
+ {t:'bio',pre:`Garbage that pollutes a river can bring `,key:`HARM`,post:` to the fish that live there.`,ans:[`TRUE`]},
+ {t:'mach',pre:`A seesaw is an example of an `,key:`INCLINED PLANE`,post:`.`,ans:[`LEVER`]},
+ {t:'mach',pre:`The fixed point on which a lever turns is the `,key:`EFFORT`,post:`.`,ans:[`FULCRUM`]},
+ {t:'mach',pre:`A kitchen knife is an example of a `,key:`WEDGE`,post:`.`,ans:[`TRUE`]},
+ {t:'adv',pre:`A thin and sharp wedge needs `,key:`MORE`,post:` effort to split wood than a thick, blunt wedge.`,ans:[`LESS`,`LOWER`,`FEWER`]},
+ {t:'adv',pre:`A long, gentle ramp needs less effort, but the load travels a `,key:`SHORTER`,post:` distance.`,ans:[`LONGER`]},
+ {t:'adv',pre:`A single fixed pulley changes the `,key:`DIRECTION`,post:` of the force.`,ans:[`TRUE`]},
+ {t:'fair',pre:`In a fair test, only `,key:`ONE`,post:` thing is changed at a time.`,ans:[`TRUE`]},
+ {t:'fair',pre:`The farther you push from the fulcrum, the `,key:`HARDER`,post:` it is to lift the load.`,ans:[`EASIER`]}
+];
+
+const ESSAYS=[
+ {t:'bio',title:`River clean-up`,scenario:`A river in a barangay is full of plastic bottles and food wrappers. Many fish are dying and the water smells bad.`,
+  question:`How does the garbage harm the living things in the river? Why should the barangay clean the river?`,
+  points:[`Garbage is a non-living thing that pollutes the water.`,`Fish and water plants cannot get the clean water they need, so they get sick or die.`,`A clean river gives living things a healthy home and keeps the water cycle working.`],
+  sample:`The garbage pollutes the water, so the fish and water plants cannot get the clean water they need and some of them die. The barangay should clean the river so that living things have a healthy home and the water stays clean as it moves through the water cycle.`},
+ {t:'mach',title:`Pushcart ramp`,scenario:`Vendors at a barangay market push heavy carts up three steps to reach the stalls. They get tired and sometimes drop their goods.`,
+  question:`What simple machine can help the vendors, and how will it make their work easier? Why should it be long and gentle instead of short and steep?`,
+  points:[`The machine is an inclined plane (a ramp).`,`It lets them push the cart with less effort than lifting it up the steps.`,`A long, gentle ramp needs less effort, even though the cart travels a longer distance. A short, steep ramp is harder to push up.`],
+  sample:`A ramp, which is an inclined plane, can help the vendors because they can push the carts up with less effort than lifting them over the steps. The ramp should be long and gentle because a longer slope needs less effort to climb, even though the carts travel a longer distance.`},
+ {t:'fair',title:`Fulcrum test`,scenario:`Mia wants to find out how moving the fulcrum changes how hard it is to lift a book using a ruler as a lever.`,
+  question:`How should Mia set up a fair test? Why must she change only the position of the fulcrum?`,
+  points:[`Use the same ruler and the same book each time.`,`Move only the fulcrum, and observe how hard it is to lift the book at each position.`,`If she changes only one thing, she can tell that the fulcrum caused the difference.`],
+  sample:`Mia should use the same ruler and the same book every time, move only the fulcrum, and check how easy it is to lift the book at each position. She must change only the fulcrum so that any difference she sees is caused by the fulcrum and nothing else.`}
+];
+
+/* ---------- helpers ---------- */
+const $=(s,r)=>(r||document).querySelector(s);
+const $$=(s,r)=>Array.prototype.slice.call((r||document).querySelectorAll(s));
+const KEY='sci6-reviewer-v1';
+let db={known:{},quizBest:null,quizRuns:0,topic:{},fix:{},essay:{}};
+function load(){try{const raw=localStorage.getItem(KEY);if(raw){const d=JSON.parse(raw);if(d&&typeof d==='object'){db=Object.assign(db,d);}}}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(db));}catch(e){}}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function norm(s){return String(s).toUpperCase().replace(/[.,]/g,'').replace(/\s+/g,' ').trim();}
+
+/* ---------- navigation ---------- */
+const VIEWS=['home','notes','cards','quiz','fix','essay'];
+function show(v){
+  if(VIEWS.indexOf(v)<0)v='home';
+  VIEWS.forEach(n=>{$('#view-'+n).hidden=(n!==v);});
+  $$('.nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.view===v?'page':'false'));
+  if(v==='home')renderStats();
+  if(v==='cards')renderCard();
+  window.scrollTo(0,0);
+  try{history.replaceState(null,'','#'+v);}catch(e){}
+}
+$$('.nav button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.view)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.go)));
+$$('[data-notes]').forEach(b=>b.addEventListener('click',()=>{show('notes');filterNotes(b.dataset.notes);}));
+$$('[data-quiz]').forEach(b=>b.addEventListener('click',()=>{show('quiz');preselect(b.dataset.quiz);}));
+
+/* ---------- lever lab ---------- */
+(function(){
+  const slider=$('#fulcrum');
+  const X1=40,X2=320,Y=118;
+  function rot(x,y,cx,cy,deg){const a=deg*Math.PI/180;const dx=x-cx,dy=y-cy;return {x:cx+dx*Math.cos(a)-dy*Math.sin(a),y:cy+dx*Math.sin(a)+dy*Math.cos(a)};}
+  function update(){
+    const p=+slider.value/100;
+    const fx=X1+(X2-X1)*p,fy=Y+6;
+    const deg=7;
+    $('#plankG').setAttribute('transform','rotate('+deg+' '+fx+' '+fy+')');
+    $('#fulcrumTri').setAttribute('points',fx+','+(Y+6)+' '+(fx-22)+',170 '+(fx+22)+',170');
+    $('#fulcrumLbl').setAttribute('x',fx);
+    const lp=rot(68,56,fx,fy,deg);
+    $('#loadLbl').setAttribute('x',lp.x);$('#loadLbl').setAttribute('y',lp.y);
+    const ep=rot(306,Y,fx,fy,deg);
+    const ey=ep.y-8;
+    $('#effortArrow').setAttribute('x1',ep.x);$('#effortArrow').setAttribute('x2',ep.x);
+    $('#effortArrow').setAttribute('y1',ey-44);$('#effortArrow').setAttribute('y2',ey-4);
+    $('#effortLbl').setAttribute('x',ep.x);$('#effortLbl').setAttribute('y',ey-52);
+    const ratio=p/(1-p);
+    const pct=Math.max(8,Math.min(100,ratio*42));
+    $('#meterFill').style.width=pct+'%';
+    let msg;
+    if(p<0.4)msg='The fulcrum is close to the load, so only a little effort is needed.';
+    else if(p<=0.6)msg='The fulcrum is in the middle, so a medium amount of effort is needed.';
+    else msg='The fulcrum is far from the load, so a lot of effort is needed.';
+    $('#leverSays').textContent=msg;
+  }
+  slider.addEventListener('input',update);
+  update();
+})();
+
+/* ---------- stats ---------- */
+function renderStats(){
+  const known=Object.keys(db.known).filter(k=>db.known[k]).length;
+  const fixDone=Object.keys(db.fix).filter(k=>db.fix[k]).length;
+  const essayDone=Object.keys(db.essay).filter(k=>db.essay[k]).length;
+  const best=db.quizBest===null?'None yet':db.quizBest+'%';
+  $('#stats').innerHTML=
+   '<div class="stat"><b>'+known+' of '+CARDS.length+'</b>flashcards known</div>'+
+   '<div class="stat"><b>'+best+'</b>best quiz score</div>'+
+   '<div class="stat"><b>'+fixDone+' of '+FIX.length+'</b>words fixed</div>'+
+   '<div class="stat"><b>'+essayDone+' of '+ESSAYS.length+'</b>essays practiced</div>';
+}
+
+/* ---------- notes ---------- */
+function filterNotes(f){
+  $$('#notesNav .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.filter===f?'true':'false'));
+  $$('.notes-sec').forEach(s=>{s.hidden=!(f==='all'||s.dataset.topic===f);});
+}
+$$('#notesNav .chip').forEach(c=>c.addEventListener('click',()=>filterNotes(c.dataset.filter)));
+
+/* ---------- flashcards ---------- */
+let deck=[],ci=0,cardFilter='all';
+function buildDeck(){
+  let list=CARDS.map((c,i)=>Object.assign({id:i},c));
+  if(cardFilter==='learning')list=list.filter(c=>!db.known[c.id]);
+  else if(cardFilter!=='all')list=list.filter(c=>c.t===cardFilter);
+  deck=list;
+  if(ci>=deck.length)ci=0;
+}
+function renderCard(){
+  buildDeck();
+  const flip=$('#flipCard');
+  flip.classList.remove('is-flipped');
+  if(!deck.length){
+    $('#cardCount').textContent='No cards here. Great job, or pick another filter.';
+    $('#cardTerm').textContent='All done';$('#cardDef').textContent='';$('#cardTopic').textContent='';$('#cardTopic2').textContent='';
+    $('#knownDot').className='known-dot';
+    return;
+  }
+  const c=deck[ci];
+  $('#cardCount').textContent='Card '+(ci+1)+' of '+deck.length;
+  $('#cardTerm').textContent=c.term;
+  $('#cardDef').textContent=c.def;
+  $('#cardTopic').textContent=TOPICS[c.t].name;
+  $('#cardTopic2').textContent=c.term;
+  $('#flipWrap').className='flip-wrap t-'+c.t;
+  $('#knownDot').className='known-dot'+(db.known[c.id]?' on':'');
+}
+$('#flipCard').addEventListener('click',()=>$('#flipCard').classList.toggle('is-flipped'));
+$('#cardNext').addEventListener('click',()=>{if(deck.length){ci=(ci+1)%deck.length;renderCard();}});
+$('#cardPrev').addEventListener('click',()=>{if(deck.length){ci=(ci-1+deck.length)%deck.length;renderCard();}});
+$('#cardShuffle').addEventListener('click',()=>{
+  const order=shuffle(CARDS.map((c,i)=>i));
+  const rank={};order.forEach((id,pos)=>rank[id]=pos);
+  buildDeck();deck.sort((a,b)=>rank[a.id]-rank[b.id]);ci=0;
+  const c=deck[0];
+  if(c){$('#flipCard').classList.remove('is-flipped');$('#cardCount').textContent='Card 1 of '+deck.length;$('#cardTerm').textContent=c.term;$('#cardDef').textContent=c.def;$('#cardTopic').textContent=TOPICS[c.t].name;$('#cardTopic2').textContent=c.term;$('#flipWrap').className='flip-wrap t-'+c.t;$('#knownDot').className='known-dot'+(db.known[c.id]?' on':'');}
+});
+$('#cardKnow').addEventListener('click',()=>{
+  if(!deck.length)return;
+  const c=deck[ci];
+  db.known[c.id]=!db.known[c.id];save();
+  $('#knownDot').className='known-dot'+(db.known[c.id]?' on':'');
+  if(db.known[c.id]&&cardFilter!=='learning'&&deck.length>1){ci=(ci+1)%deck.length;renderCard();}
+  else if(cardFilter==='learning'){renderCard();}
+});
+$$('#cardFilters .chip').forEach(c=>c.addEventListener('click',()=>{
+  cardFilter=c.dataset.f;ci=0;
+  $$('#cardFilters .chip').forEach(x=>x.setAttribute('aria-pressed',x===c?'true':'false'));
+  renderCard();
+}));
+document.addEventListener('keydown',e=>{
+  if($('#view-cards').hidden)return;
+  const tag=(e.target&&e.target.tagName)||'';
+  if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT')return;
+  if(e.key==='ArrowRight')$('#cardNext').click();
+  else if(e.key==='ArrowLeft')$('#cardPrev').click();
+});
+
+/* ---------- quiz ---------- */
+let run=null;
+function selectedTopics(){return $$('#quizTopics .chip').filter(c=>c.getAttribute('aria-pressed')==='true').map(c=>c.dataset.t);}
+function preselect(t){
+  $$('#quizTopics .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.t===t?'true':'false'));
+  resetQuizView();updateNote();
+}
+function updateNote(){
+  const n=QUIZ.filter(q=>selectedTopics().indexOf(q.t)>=0).length;
+  $('#quizNote').textContent=n?(n+' questions available in the topics you picked.'):'Pick at least one topic.';
+  $('#quizStart').disabled=!n;
+}
+$$('#quizTopics .chip').forEach(c=>c.addEventListener('click',()=>{
+  c.setAttribute('aria-pressed',c.getAttribute('aria-pressed')==='true'?'false':'true');updateNote();
+}));
+function resetQuizView(){$('#quizSetup').hidden=false;$('#quizPlay').hidden=true;$('#quizDone').hidden=true;}
+function prepare(q){
+  return {t:q.t,q:q.q,e:q.e,opts:shuffle(q.o.map((text,i)=>({text:text,ok:i===q.a})))};
+}
+function startQuiz(list){
+  let pool;
+  if(list){pool=list;}
+  else{
+    const tops=selectedTopics();
+    pool=shuffle(QUIZ.filter(q=>tops.indexOf(q.t)>=0));
+    const v=$('#quizLen').value;
+    if(v!=='all')pool=pool.slice(0,Math.min(+v,pool.length));
+  }
+  run={list:pool.map(prepare),i:0,score:0,miss:[],locked:false,by:{}};
+  $('#quizSetup').hidden=true;$('#quizDone').hidden=true;$('#quizPlay').hidden=false;
+  renderQ();
+}
+function renderQ(){
+  const q=run.list[run.i];
+  run.locked=false;
+  $('#quizCard').className='card t-'+q.t;
+  $('#qTag').className='tag';$('#qTag').textContent=TOPICS[q.t].name;
+  $('#qCount').textContent='Question '+(run.i+1)+' of '+run.list.length;
+  $('#qBar').style.width=(run.i/run.list.length*100)+'%';
+  $('#qText').textContent=q.q;
+  $('#qOpts').innerHTML=q.opts.map((o,i)=>'<button type="button" class="opt" data-i="'+i+'"><span class="letter">'+'ABCD'.charAt(i)+'</span><span>'+esc(o.text)+'</span></button>').join('');
+  $('#qWhy').innerHTML='';
+  $('#qNext').disabled=true;
+  $('#qNext').textContent=run.i===run.list.length-1?'See my score':'Next question';
+  $$('#qOpts .opt').forEach(b=>b.addEventListener('click',()=>answer(+b.dataset.i)));
+}
+function answer(i){
+  if(run.locked)return;
+  run.locked=true;
+  const q=run.list[run.i];
+  const ok=q.opts[i].ok;
+  const rec=run.by[q.t]||(run.by[q.t]={c:0,t:0});
+  rec.t++;
+  const tp=db.topic[q.t]||(db.topic[q.t]={c:0,t:0});tp.t++;
+  if(ok){run.score++;rec.c++;tp.c++;}else{run.miss.push(q);}
+  save();
+  $$('#qOpts .opt').forEach((b,k)=>{
+    b.disabled=true;
+    if(q.opts[k].ok)b.classList.add('right');
+    else if(k===i)b.classList.add('wrong');
+  });
+  $('#qWhy').innerHTML='<div class="why '+(ok?'good':'bad')+'"><b>'+(ok?'Correct.':'Not quite.')+'</b> '+esc(q.e)+'</div>';
+  $('#qNext').disabled=false;
+  $('#qNext').focus();
+}
+$('#qNext').addEventListener('click',()=>{
+  if(run.i<run.list.length-1){run.i++;renderQ();}
+  else finishQuiz();
+});
+function finishQuiz(){
+  const total=run.list.length;
+  const pct=Math.round(run.score/total*100);
+  db.quizRuns=(db.quizRuns||0)+1;
+  if(db.quizBest===null||pct>db.quizBest)db.quizBest=pct;
+  save();
+  let msg;
+  if(pct>=90)msg='Excellent. You are ready for the test.';
+  else if(pct>=75)msg='Good work. Review the questions you missed.';
+  else if(pct>=50)msg='You are getting there. Read the notes for the topics below, then try again.';
+  else msg='Keep going. Start with the study notes and flashcards, then retake the quiz.';
+  const lines=Object.keys(run.by).map(t=>{
+    const r=run.by[t];const w=Math.round(r.c/r.t*100);
+    return '<div class="line t-'+t+'"><span>'+esc(TOPICS[t].name)+'</span><span class="track"><i style="width:'+w+'%"></i></span><span>'+r.c+' of '+r.t+'</span></div>';
+  }).join('');
+  let missed='';
+  if(run.miss.length){
+    missed='<h3>Review these</h3><ol class="missed">'+run.miss.map(q=>{
+      const right=q.opts.filter(o=>o.ok)[0].text;
+      return '<li><b>'+esc(q.q)+'</b><br>Answer: '+esc(right)+'<br><span class="muted">'+esc(q.e)+'</span></li>';
+    }).join('')+'</ol>';
+  }
+  $('#quizPlay').hidden=true;
+  const done=$('#quizDone');done.hidden=false;
+  done.innerHTML='<div class="card"><h2>Your score</h2><div class="score-big">'+run.score+' of '+total+'</div><p style="margin-top:8px">'+esc(msg)+'</p><div class="breakdown">'+lines+'</div>'+missed+
+    '<div class="row" style="margin-top:14px">'+(run.miss.length?'<button class="btn" type="button" id="retryMiss">Retry missed questions</button>':'')+'<button class="btn alt" type="button" id="newQuiz">New quiz</button></div></div>';
+  const rm=$('#retryMiss');
+  if(rm)rm.addEventListener('click',()=>{
+    const again=run.miss.map(q=>({t:q.t,q:q.q,e:q.e,o:q.opts.map(o=>o.text),a:q.opts.findIndex(o=>o.ok)}));
+    startQuiz(shuffle(again));
+  });
+  $('#newQuiz').addEventListener('click',()=>{resetQuizView();updateNote();});
+}
+$('#quizStart').addEventListener('click',()=>startQuiz());
+updateNote();
+
+/* ---------- fix the word ---------- */
+function renderFix(){
+  $('#fixList').innerHTML=FIX.map((f,i)=>
+   '<div class="card fix-item t-'+f.t+'" data-i="'+i+'">'+
+   '<span class="tag">'+esc(TOPICS[f.t].name)+'</span>'+
+   '<p style="margin:10px 0">'+(i+1)+'. '+esc(f.pre)+'<mark>'+esc(f.key)+'</mark>'+esc(f.post)+'</p>'+
+   '<div class="row"><input type="text" aria-label="Your answer for statement '+(i+1)+'" placeholder="TRUE or the new word" autocomplete="off" spellcheck="false"><button class="btn" type="button">Check</button></div>'+
+   '<div class="fb" aria-live="polite"></div></div>').join('');
+  $$('#fixList .fix-item').forEach(card=>{
+    const i=+card.dataset.i;
+    const input=$('input',card),fb=$('.fb',card);
+    function check(){
+      const v=norm(input.value);
+      if(!v){fb.className='fb bad';fb.textContent='Type TRUE or the replacement word first.';return;}
+      const f=FIX[i];
+      const isTrue=f.ans[0]==='TRUE';
+      const ok=f.ans.map(norm).indexOf(v)>=0||(v==='T'&&isTrue);
+      if(ok){
+        fb.className='fb good';
+        fb.textContent=isTrue?'Correct. The statement is true.':'Correct. '+f.ans[0]+' makes the statement true.';
+        db.fix[i]=true;save();
+      }else{
+        fb.className='fb bad';
+        fb.textContent=isTrue?'Not quite. This statement is already correct, so the answer is TRUE.':'Not quite. Think about what is correct, then try again. Hint: the answer is not '+f.key+'.';
+      }
+      renderFixTally();
+    }
+    $('button',card).addEventListener('click',check);
+    input.addEventListener('keydown',e=>{if(e.key==='Enter')check();});
+    if(db.fix[i]){fb.className='fb good';fb.textContent='You got this one before.';}
+  });
+  renderFixTally();
+}
+function renderFixTally(){
+  const n=Object.keys(db.fix).filter(k=>db.fix[k]).length;
+  $('#fixTally').textContent=n+' of '+FIX.length+' correct';
+}
+$('#fixReset').addEventListener('click',()=>{db.fix={};save();renderFix();});
+
+/* ---------- essay ---------- */
+let essayIdx=0;
+function renderEssay(){
+  $('#essayTabs').innerHTML=ESSAYS.map((e,i)=>'<button type="button" class="chip" data-i="'+i+'" aria-pressed="'+(i===essayIdx?'true':'false')+'">'+esc(e.title)+(db.essay[i]?' (done)':'')+'</button>').join('');
+  $$('#essayTabs .chip').forEach(c=>c.addEventListener('click',()=>{essayIdx=+c.dataset.i;renderEssay();}));
+  const e=ESSAYS[essayIdx];
+  $('#essayBody').innerHTML=
+   '<div class="card t-'+e.t+'">'+
+   '<div class="scenario"><b>Situation</b><br>'+esc(e.scenario)+'</div>'+
+   '<p><b>'+esc(e.question)+'</b></p>'+
+   '<label for="essayText" class="muted">Write your answer in 2 to 3 complete sentences.</label>'+
+   '<textarea id="essayText" placeholder="Type your answer here"></textarea>'+
+   '<div class="row" style="margin-top:12px"><button class="btn" type="button" id="essayReveal">Check my answer</button></div>'+
+   '<div id="essayKey" hidden></div></div>';
+  $('#essayReveal').addEventListener('click',()=>{
+    const box=$('#essayKey');
+    box.hidden=false;
+    box.innerHTML='<h3 style="margin-top:16px">Did your answer include these?</h3><ul class="checks">'+
+      e.points.map((p,k)=>'<li><label><input type="checkbox" data-k="'+k+'"><span>'+esc(p)+'</span></label></li>').join('')+'</ul>'+
+      '<p id="essayScore" class="fb" aria-live="polite"></p>'+
+      '<div class="why"><b>Sample answer</b><br>'+esc(e.sample)+'</div>';
+    const boxes=$$('input[type=checkbox]',box);
+    boxes.forEach(b=>b.addEventListener('change',()=>{
+      const n=boxes.filter(x=>x.checked).length;
+      const s=$('#essayScore');
+      s.className='fb '+(n===boxes.length?'good':'bad');
+      s.textContent='You covered '+n+' of '+boxes.length+' key points.';
+      if(n===boxes.length){db.essay[essayIdx]=true;save();}
+    }));
+  });
+}
+
+/* ---------- start ---------- */
+load();
+renderFix();
+renderEssay();
+const start=(location.hash||'').replace('#','');
+show(VIEWS.indexOf(start)>=0?start:'home');
+})();
+</script>
+</body>
+</html>
